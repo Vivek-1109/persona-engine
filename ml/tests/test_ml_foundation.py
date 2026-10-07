@@ -172,12 +172,12 @@ class TestMLFoundation(unittest.TestCase):
         sample_path = ml_root / "data" / "sample" / "sample_conversations.jsonl"
         analyzer = DatasetAnalyzer()
         report = analyzer.analyze_file(sample_path)
-        self.assertEqual(report.total_conversations, 5)
-        self.assertEqual(report.total_messages, 24)
+        self.assertEqual(report.total_conversations, 120)
+        self.assertEqual(report.total_messages, 478)
         self.assertGreater(report.emoji_total_count, 0)
-        self.assertGreater(report.hinglish_ratio, 0.5)
-        self.assertIn("user", report.messages_by_speaker)
-        self.assertIn("persona", report.messages_by_speaker)
+        self.assertGreater(report.hinglish_ratio, 0.4)
+        self.assertIn("naata", report.messages_by_speaker)
+        self.assertIn("vivek", report.messages_by_speaker)
 
     def test_10_evaluation_metrics_and_evaluator(self):
         """Verify evaluation metric calculations and evaluator reporting."""

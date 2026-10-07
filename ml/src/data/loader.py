@@ -10,6 +10,70 @@ from pathlib import Path
 from typing import Any, Dict, Generator, List, Union
 
 
+def normalize_conversation(conv: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Normalizes various conversation representations into the standard schema:
+    {
+        "conversation_id": str,
+        "persona_id": str,
+        "messages": [{"speaker": str, "text": str}],
+        "metadata": dict
+    }
+    Supports:
+    - Standard multi-turn format (has 'messages' with 'speaker' and 'text')
+    - WhatsApp context-response pair format (has 'context' and 'response')
+    - SFT / ChatML format (has 'messages' with 'role' and 'content', and optional 'target')
+    """
+    if not isinstance(conv, dict):
+        return conv
+
+    # 1. Format: context + response pair (e.g. WhatsApp export samples)
+    if "context" in conv and "response" in conv:
+        conv_id = str(conv.get("conversation_id") or conv.get("example_id") or "conv-unknown")
+        persona_spk = str(conv.get("persona_speaker") or conv.get("persona_id") or conv.get("target_speaker") or "persona")
+        messages = []
+        context = conv.get("context", [])
+        if isinstance(context, list):
+            for c in context:
+                if isinstance(c, dict):
+                    spk = str(c.get("speaker") or c.get("role") or "user")
+                    txt = str(c.get("text") if "text" in c else c.get("content", ""))
+                    messages.append({"speaker": spk, "text": txt})
+        messages.append({"speaker": persona_spk, "text": str(conv.get("response", ""))})
+        return {
+            "conversation_id": conv_id,
+            "persona_id": persona_spk,
+            "messages": messages,
+            "metadata": conv.get("metadata", {}),
+        }
+
+    # 2. Format: messages list where items use role / content (SFT format)
+    messages = conv.get("messages")
+    if isinstance(messages, list) and messages:
+        first = messages[0]
+        if isinstance(first, dict) and "role" in first and "speaker" not in first:
+            conv_id = str(conv.get("conversation_id") or conv.get("example_id") or "conv-unknown")
+            persona_spk = str(conv.get("persona_id") or "persona")
+            norm_messages = []
+            for m in messages:
+                if isinstance(m, dict):
+                    role = str(m.get("role", "user"))
+                    content = str(m.get("content") if "content" in m else m.get("text", ""))
+                    spk = "user" if role == "user" else ("persona" if role == "assistant" else role)
+                    norm_messages.append({"speaker": spk, "text": content})
+            if "target" in conv:
+                norm_messages.append({"speaker": persona_spk, "text": str(conv.get("target", ""))})
+            return {
+                "conversation_id": conv_id,
+                "persona_id": persona_spk,
+                "messages": norm_messages,
+                "metadata": conv.get("metadata", {}),
+            }
+
+    # 3. Already standard format or missing messages
+    return conv
+
+
 def load_jsonl(file_path: Union[str, Path]) -> List[Dict[str, Any]]:
     """Loads all records from a JSON Lines (.jsonl) file."""
     path = Path(file_path)

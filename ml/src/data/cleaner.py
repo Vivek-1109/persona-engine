@@ -9,6 +9,8 @@ from __future__ import annotations
 import unicodedata
 from typing import Any, Dict, List, Optional
 
+from .loader import normalize_conversation
+
 
 class DataCleaner:
     """
@@ -54,7 +56,8 @@ class DataCleaner:
         Cleans a single conversation dict.
         Returns cleaned conversation or None if conversation fails quality criteria.
         """
-        messages = conv.get("messages", [])
+        norm_conv = normalize_conversation(conv)
+        messages = norm_conv.get("messages", [])
         if not messages or not isinstance(messages, list):
             return None
 
@@ -97,7 +100,7 @@ class DataCleaner:
         if len(cleaned_messages) < self.min_turns:
             return None
 
-        result = dict(conv)
+        result = dict(norm_conv)
         result["messages"] = cleaned_messages
         return result
 

@@ -15,7 +15,7 @@ try:
 except ImportError:
     jsonschema = None
 
-from .loader import iter_jsonl, load_jsonl
+from .loader import iter_jsonl, load_jsonl, normalize_conversation
 
 
 @dataclass
@@ -76,7 +76,12 @@ class DatasetValidator:
         min_message_len: int = 1,
         max_message_len: int = 5000,
     ):
-        self.allowed_speakers = allowed_speakers or {"user", "persona", "system"}
+        self.enforce_allowed_speakers = allowed_speakers is not None
+        self.allowed_speakers = (
+            set(s.lower() for s in allowed_speakers)
+            if allowed_speakers
+            else {"user", "persona", "system"}
+        )
         self.min_messages = min_messages
         self.max_messages = max_messages
         self.min_message_len = min_message_len
@@ -106,12 +111,13 @@ class DatasetValidator:
         issues: List[ValidationIssue],
     ) -> int:
         """Validates a single conversation dictionary. Returns message count."""
-        conv_id = conv.get("conversation_id")
+        norm_conv = normalize_conversation(conv)
+        conv_id = norm_conv.get("conversation_id")
 
         # 1. JSON Schema check if loaded
         if self.schema:
             try:
-                jsonschema.validate(instance=conv, schema=self.schema)
+                jsonschema.validate(instance=norm_conv, schema=self.schema)
             except jsonschema.ValidationError as err:
                 issues.append(
                     ValidationIssue(
@@ -146,7 +152,7 @@ class DatasetValidator:
             seen_ids.add(str_id)
 
         # 3. Check messages list
-        messages = conv.get("messages")
+        messages = norm_conv.get("messages")
         if not isinstance(messages, list):
             issues.append(
                 ValidationIssue(
@@ -181,6 +187,7 @@ class DatasetValidator:
         # 4. Check each message
         has_persona_turn = False
         has_user_turn = False
+        persona_name = str(norm_conv.get("persona_id") or "").lower()
 
         for idx, msg in enumerate(messages):
             if not isinstance(msg, dict):
@@ -207,7 +214,7 @@ class DatasetValidator:
                         message=f"Message {idx} missing 'speaker' field",
                     )
                 )
-            elif str(speaker).lower() not in self.allowed_speakers:
+            elif self.enforce_allowed_speakers and str(speaker).lower() not in self.allowed_speakers:
                 issues.append(
                     ValidationIssue(
                         severity="ERROR",
@@ -218,9 +225,9 @@ class DatasetValidator:
                 )
             else:
                 spk_lower = str(speaker).lower()
-                if spk_lower == "persona":
+                if spk_lower in {"persona", "assistant"} or (persona_name and spk_lower == persona_name):
                     has_persona_turn = True
-                elif spk_lower == "user":
+                else:
                     has_user_turn = True
 
             # Text check
@@ -264,22 +271,22 @@ class DatasetValidator:
                     )
 
         # Check speaker balance
-        if not has_persona_turn:
+        if not has_persona_turn and len(messages) > 1:
             issues.append(
                 ValidationIssue(
                     severity="WARNING",
                     conversation_id=str(conv_id),
                     message_index=None,
-                    message="Conversation contains no messages from speaker 'persona'",
+                    message="Conversation contains no messages from target persona",
                 )
             )
-        if not has_user_turn:
+        if not has_user_turn and len(messages) > 1:
             issues.append(
                 ValidationIssue(
                     severity="WARNING",
                     conversation_id=str(conv_id),
                     message_index=None,
-                    message="Conversation contains no messages from speaker 'user'",
+                    message="Conversation contains no messages from conversational partner",
                 )
             )
 

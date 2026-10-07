@@ -14,7 +14,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from ..data.loader import load_jsonl
+from ..data.loader import load_jsonl, normalize_conversation
 
 # Unicode range pattern covering popular emojis
 EMOJI_PATTERN = re.compile(
@@ -132,9 +132,15 @@ class DatasetAnalyzer:
         bigrams_counter: Counter[str] = Counter()
         topics_counter: Counter[str] = Counter()
 
-        for conv in conversations:
+        for raw_conv in conversations:
+            conv = normalize_conversation(raw_conv)
             messages = conv.get("messages", [])
             conv_lengths.append(len(messages))
+
+            # Optional top-level metadata topic
+            meta = conv.get("metadata", {})
+            if isinstance(meta, dict) and meta.get("topic"):
+                topics_counter[str(meta["topic"])] += 1
 
             for msg in messages:
                 if not isinstance(msg, dict):

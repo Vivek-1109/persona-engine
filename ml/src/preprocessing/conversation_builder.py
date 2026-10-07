@@ -8,6 +8,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
+from ..data.loader import normalize_conversation
+
 
 class ConversationBuilder:
     """
@@ -29,15 +31,15 @@ class ConversationBuilder:
         self.chat_template = chat_template.lower()
         self.max_history_turns = max_history_turns
 
-    def format_turn(self, role: str, content: str) -> str:
+    def format_turn(self, role: str, content: str, persona_name: str = "") -> str:
         """Formats a single dialogue turn using standard chat templates."""
-        # Map our roles to chat template roles
-        role_map = {
-            self.user_speaker: "user",
-            self.target_speaker: "assistant",
-            self.system_speaker: "system",
-        }
-        mapped_role = role_map.get(role.lower(), role)
+        role_lower = str(role).lower()
+        if role_lower in {self.target_speaker, "persona", "assistant"} or (persona_name and role_lower == persona_name.lower()):
+            mapped_role = "assistant"
+        elif role_lower in {self.system_speaker, "system"}:
+            mapped_role = "system"
+        else:
+            mapped_role = "user"
 
         if self.chat_template == "chatml":
             return f"<|im_start|>{mapped_role}\n{content}<|im_end|>\n"
@@ -62,9 +64,10 @@ class ConversationBuilder:
         For every persona turn, generates a training example containing
         the preceding dialogue context and the persona response.
         """
-        conv_id = str(conversation.get("conversation_id", "unknown"))
-        persona_id = str(conversation.get("persona_id", "default"))
-        messages = conversation.get("messages", [])
+        norm_conv = normalize_conversation(conversation)
+        conv_id = str(norm_conv.get("conversation_id", "unknown"))
+        persona_id = str(norm_conv.get("persona_id", "default"))
+        messages = norm_conv.get("messages", [])
 
         if not messages or len(messages) < 2:
             return []
@@ -81,7 +84,13 @@ class ConversationBuilder:
             if not text:
                 continue
 
-            if speaker == self.target_speaker and len(history_buffer) > 0:
+            is_target_turn = (
+                speaker == self.target_speaker
+                or speaker in {"persona", "assistant"}
+                or (persona_id and persona_id.lower() not in {"default", "persona"} and speaker == persona_id.lower())
+            )
+
+            if is_target_turn and len(history_buffer) > 0:
                 # Target found! Build training sequence
                 turns_to_use = (
                     history_buffer[-self.max_history_turns :]
@@ -91,10 +100,10 @@ class ConversationBuilder:
 
                 formatted_parts: List[str] = []
                 for h in turns_to_use:
-                    formatted_parts.append(self.format_turn(h["speaker"], h["text"]))
+                    formatted_parts.append(self.format_turn(h["speaker"], h["text"], persona_name=persona_id))
 
                 # Append current target persona response
-                formatted_parts.append(self.format_turn(speaker, text))
+                formatted_parts.append(self.format_turn(speaker, text, persona_name=persona_id))
                 full_text = "".join(formatted_parts).strip()
 
                 example: Dict[str, Any] = {
@@ -103,7 +112,7 @@ class ConversationBuilder:
                     "persona_id": persona_id,
                     "metadata": {
                         "num_turns": len(turns_to_use) + 1,
-                        "target_speaker": self.target_speaker,
+                        "target_speaker": persona_id if persona_id != "default" else self.target_speaker,
                     },
                 }
                 if split:
