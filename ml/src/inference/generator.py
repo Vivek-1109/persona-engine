@@ -18,13 +18,13 @@ logger = logging.getLogger(__name__)
 class GenerationParams:
     """Hyperparameters governing text decoding/sampling."""
 
-    max_new_tokens: int = 128
-    temperature: float = 0.7
-    top_p: float = 0.9
-    top_k: int = 50
+    max_new_tokens: int = 48
+    temperature: float = 0.4
+    top_p: float = 0.85
+    top_k: int = 40
     do_sample: bool = True
-    repetition_penalty: float = 1.1
-    stop_sequences: List[str] = field(default_factory=lambda: ["<|im_end|>", "\nUser:"])
+    repetition_penalty: float = 1.15
+    stop_sequences: List[str] = field(default_factory=lambda: ["<|im_end|>", "\nNaata:", "\nVivek:", "\nUser:"])
 
 
 class PersonaGenerator:
@@ -212,5 +212,16 @@ class PersonaGenerator:
 
         prompt_len = inputs["input_ids"].shape[1]
         new_tokens = outputs[0][prompt_len:]
-        response = self._tokenizer.decode(new_tokens, skip_special_tokens=True)
-        return response.strip()
+        response = self._tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+
+        # Clean any accidental persona/speaker prefix echo
+        for prefix in ["Vivek:", "vivek:", "Naata:", "naata:", "Assistant:", "assistant:"]:
+            if response.startswith(prefix):
+                response = response[len(prefix):].strip()
+
+        # Truncate if model started hallucinating a second speaker turn
+        for stop_seq in ["\nNaata:", "\nVivek:", "\nUser:", "\nAssistant:", "<|im_start|>", "<|im_end|>"]:
+            if stop_seq in response:
+                response = response.split(stop_seq)[0].strip()
+
+        return response

@@ -20,23 +20,20 @@ class TrainingConfig:
 
     base_model_name: str = "Qwen/Qwen2.5-1.5B-Instruct"
     method: str = "qlora"  # "qlora" | "lora" | "full"
-    lora_r: int = 64
-    lora_alpha: int = 16
+    lora_r: int = 16
+    lora_alpha: int = 32
     lora_dropout: float = 0.05
-    learning_rate: float = 2e-4
-    num_epochs: int = 3
+    learning_rate: float = 1.5e-4
+    num_epochs: int = 4
     batch_size: int = 2
     gradient_accumulation_steps: int = 4
-    max_seq_length: int = 1024
+    max_seq_length: int = 512
     target_modules: List[str] = field(
         default_factory=lambda: [
             "q_proj",
             "k_proj",
             "v_proj",
             "o_proj",
-            "gate_proj",
-            "up_proj",
-            "down_proj",
         ]
     )
     output_dir: str = "models/adapters"
@@ -295,8 +292,22 @@ class PersonaTrainer:
             elif "tokenizer" in trainer_sig:
                 trainer_kwargs["tokenizer"] = self._tokenizer
 
-            if "dataset_text_field" in trainer_sig and "dataset_text_field" not in config_kwargs:
-                trainer_kwargs["dataset_text_field"] = "text"
+            # Mask prompt tokens so loss is strictly computed on assistant target completion
+            try:
+                from trl import DataCollatorForCompletionOnlyLM
+
+                response_template = "<|im_start|>assistant\n"
+                response_template_ids = self._tokenizer.encode(
+                    response_template, add_special_tokens=False
+                )
+                collator = DataCollatorForCompletionOnlyLM(
+                    response_template=response_template_ids,
+                    tokenizer=self._tokenizer,
+                )
+                trainer_kwargs["data_collator"] = collator
+                logger.info("PersonaTrainer: DataCollatorForCompletionOnlyLM enabled (loss masked for prompt tokens).")
+            except Exception as collator_err:
+                logger.warning(f"Could not initialize DataCollatorForCompletionOnlyLM: {collator_err}")
 
             trainer = SFTTrainer(**trainer_kwargs)
 
@@ -315,8 +326,10 @@ class PersonaTrainer:
                 f"TRL SFTTrainer initialization failed ({trl_err}). "
                 f"Falling back to standard Hugging Face Trainer."
             )
-            # Fallback to standard Hugging Face Trainer
+            # Fallback to standard Hugging Face Trainer with completion-only masking
             from transformers import DataCollatorForSeq2Seq, Trainer, TrainingArguments
+
+            resp_ids = self._tokenizer.encode("<|im_start|>assistant\n", add_special_tokens=False)
 
             def tokenize_func(examples):
                 tokens = self._tokenizer(
@@ -324,7 +337,20 @@ class PersonaTrainer:
                     truncation=True,
                     max_length=self.config.max_seq_length,
                 )
-                tokens["labels"] = [list(ids) for ids in tokens["input_ids"]]
+                labels = []
+                for input_ids in tokens["input_ids"]:
+                    label_ids = list(input_ids)
+                    resp_start = -1
+                    for i in range(len(input_ids) - len(resp_ids) + 1):
+                        if input_ids[i : i + len(resp_ids)] == resp_ids:
+                            resp_start = i + len(resp_ids)
+                            break
+                    if resp_start != -1:
+                        # Mask all user/system prompt tokens with -100
+                        for j in range(resp_start):
+                            label_ids[j] = -100
+                    labels.append(label_ids)
+                tokens["labels"] = labels
                 return tokens
 
             tokenized_dataset = dataset.map(tokenize_func, batched=True, remove_columns=["text"])

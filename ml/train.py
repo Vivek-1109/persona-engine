@@ -36,7 +36,7 @@ def main():
     parser.add_argument(
         "--epochs",
         type=int,
-        default=3,
+        default=4,
         help="Number of training epochs",
     )
     parser.add_argument(
@@ -54,13 +54,13 @@ def main():
     parser.add_argument(
         "--lr",
         type=float,
-        default=2e-4,
+        default=1.5e-4,
         help="Learning rate",
     )
     parser.add_argument(
         "--lora-r",
         type=int,
-        default=64,
+        default=16,
         help="LoRA rank dimension",
     )
     parser.add_argument(

@@ -32,7 +32,7 @@ def run_test_prompts(generator):
         ("Naata", "Bhai gym chal raha hai ya aalsi ho gaya?"),
     ]
 
-    params = GenerationParams(temperature=0.7, max_new_tokens=100)
+    params = GenerationParams(temperature=0.4, max_new_tokens=48)
 
     for speaker, prompt in test_dialogues:
         print(f"\n[Prompt from {speaker}]: {prompt}")
@@ -71,7 +71,7 @@ def main():
     parser.add_argument(
         "--temp",
         type=float,
-        default=0.7,
+        default=0.4,
         help="Generation temperature",
     )
     args = parser.parse_args()
@@ -103,7 +103,7 @@ def main():
         print(f"NOTE: Adapter not found at '{adapter_path}'. Running base model zero-shot.")
 
     if args.prompt:
-        params = GenerationParams(temperature=args.temp, max_new_tokens=100)
+        params = GenerationParams(temperature=args.temp, max_new_tokens=48)
         messages = [{"speaker": "Naata", "text": args.prompt}]
         print(f"\n[Prompt from Naata]: {args.prompt}")
         reply = generator.generate(messages, params=params)
@@ -130,7 +130,7 @@ def main():
     print("=" * 60)
 
     conversation_history = []
-    params = GenerationParams(temperature=args.temp, max_new_tokens=128)
+    params = GenerationParams(temperature=args.temp, max_new_tokens=48)
 
     while True:
         try:
