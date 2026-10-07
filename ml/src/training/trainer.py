@@ -96,6 +96,7 @@ class PersonaTrainer:
             base_model = AutoModelForCausalLM.from_pretrained(
                 self.config.base_model_name,
                 quantization_config=bnb_config,
+                torch_dtype=torch.float16,
                 device_map="auto",
                 trust_remote_code=True,
             )
@@ -112,6 +113,12 @@ class PersonaTrainer:
             )
 
             self._model = get_peft_model(base_model, lora_config)
+
+            # Ensure all trainable LoRA parameters are float32 for stable optimization
+            for p in self._model.parameters():
+                if p.requires_grad:
+                    p.data = p.data.to(torch.float32)
+
             self._model.print_trainable_parameters()
 
         elif has_cuda:
@@ -257,7 +264,7 @@ class PersonaTrainer:
                 "learning_rate": self.config.learning_rate,
                 "logging_steps": 5,
                 "save_strategy": "epoch",
-                "fp16": torch.cuda.is_available(),
+                "fp16": False,
                 "bf16": False,
                 "optim": "paged_adamw_8bit" if torch.cuda.is_available() else "adamw_torch",
                 "report_to": "none",
@@ -309,7 +316,7 @@ class PersonaTrainer:
                 f"Falling back to standard Hugging Face Trainer."
             )
             # Fallback to standard Hugging Face Trainer
-            from transformers import DataCollatorForLanguageModeling, Trainer, TrainingArguments
+            from transformers import DataCollatorForSeq2Seq, Trainer, TrainingArguments
 
             def tokenize_func(examples):
                 tokens = self._tokenizer(
@@ -320,7 +327,7 @@ class PersonaTrainer:
                 tokens["labels"] = [list(ids) for ids in tokens["input_ids"]]
                 return tokens
 
-            tokenized_dataset = dataset.map(tokenize_func, batched=True)
+            tokenized_dataset = dataset.map(tokenize_func, batched=True, remove_columns=["text"])
 
             training_args = TrainingArguments(
                 output_dir=str(out_dir),
@@ -330,15 +337,17 @@ class PersonaTrainer:
                 learning_rate=self.config.learning_rate,
                 logging_steps=5,
                 save_strategy="epoch",
-                fp16=torch.cuda.is_available(),
+                fp16=False,
                 bf16=False,
                 optim="paged_adamw_8bit" if torch.cuda.is_available() else "adamw_torch",
                 report_to="none",
                 seed=self.config.seed,
             )
 
-            data_collator = DataCollatorForLanguageModeling(
-                tokenizer=self._tokenizer, mlm=False
+            data_collator = DataCollatorForSeq2Seq(
+                tokenizer=self._tokenizer,
+                pad_to_multiple_of=8,
+                return_tensors="pt",
             )
 
             trainer = Trainer(
