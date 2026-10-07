@@ -1,0 +1,99 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Node / Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor / IDE
+.idea/
+*.iml
+.vscode/
+obsidian/.obsidian/workspace*.json
+.obsidian/workspace*.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database / Volumes
+postgres-data/
+
+# Python / ML
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+ml/data/raw/*
+ml/data/processed/*
+ml/data/annotated/*
+ml/data/training/*
+ml/data/evaluation/*
+!ml/data/raw/.gitkeep
+!ml/data/processed/.gitkeep
+!ml/data/annotated/.gitkeep
+!ml/data/training/.gitkeep
+!ml/data/evaluation/.gitkeep
+!ml/data/sample/
+ml/models/base/*
+ml/models/adapters/*
+ml/models/checkpoints/*
+!ml/models/base/.gitkeep
+!ml/models/adapters/.gitkeep
+!ml/models/checkpoints/.gitkeep
+
+# Markdown documentation (keep only root README.md)
+*.md
+!/README.md
+
+# Obsidian Vault
+obsidian/

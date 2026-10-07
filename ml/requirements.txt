@@ -1,0 +1,24 @@
+# Persona Engine — ML Foundation (Core / Local)
+# These are version-pinned minimally for reproducibility.
+# GPU-specific packages (torch CUDA, bitsandbytes) belong in requirements-colab.txt.
+
+# Configuration & Schemas
+pyyaml>=6.0
+jsonschema>=4.20
+
+# Data Processing
+pandas>=2.1
+numpy>=1.26
+
+# NLP / ML Core (CPU-friendly installs)
+scikit-learn>=1.4
+
+# Visualization
+matplotlib>=3.8
+
+# Jupyter (local development)
+jupyter>=1.0
+ipykernel>=6.0
+
+# Utilities
+tqdm>=4.66

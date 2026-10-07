@@ -1,0 +1,43 @@
+# =============================================================================
+# Persona Engine — Dataset Configuration
+# =============================================================================
+
+dataset:
+  # Speakers expected in the conversation data
+  speakers:
+    user: "user"
+    persona: "persona"
+    system: "system"
+
+  # File format for conversational datasets
+  format: "jsonl"
+
+  # Validation thresholds
+  validation:
+    min_messages_per_conversation: 2
+    max_messages_per_conversation: 500
+    min_message_length: 1
+    max_message_length: 5000
+    allowed_speakers:
+      - "user"
+      - "persona"
+      - "system"
+
+  # Train / validation / test split ratios
+  split:
+    train: 0.85
+    validation: 0.10
+    test: 0.05
+    shuffle: true
+
+  # Preprocessing
+  preprocessing:
+    # Personality-preserving: do NOT strip these by default
+    preserve_emojis: true
+    preserve_slang: true
+    preserve_language_mixing: true
+    preserve_punctuation_style: true
+    normalize_unicode: true
+    strip_urls: false
+    strip_emails: false
+    min_conversation_turns: 2

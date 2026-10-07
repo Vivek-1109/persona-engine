@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS personas (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_personas_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_personas_user_id ON personas(user_id);
+CREATE INDEX IF NOT EXISTS idx_personas_status ON personas(status);

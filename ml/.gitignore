@@ -1,0 +1,89 @@
+# ML Workspace — Persona Engine
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+.eggs/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
+.installed.cfg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# Model artifacts (NEVER commit large files)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+*.ggml
+*.h5
+*.onnx
+*.tflite
+models/base/*
+models/adapters/*
+models/checkpoints/*
+!models/base/.gitkeep
+!models/adapters/.gitkeep
+!models/checkpoints/.gitkeep
+
+# Datasets — private/real conversation data
+data/raw/*
+data/processed/*
+data/annotated/*
+data/training/*
+data/evaluation/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/annotated/.gitkeep
+!data/training/.gitkeep
+!data/evaluation/.gitkeep
+# Keep sample data
+!data/sample/
+
+# Experiment artifacts (selective — keep configs & notes, ignore large outputs)
+experiments/*/outputs/
+experiments/*/tensorboard/
+experiments/*/*.safetensors
+experiments/*/*.bin
+experiments/*/*.pt
+
+# wandb / MLflow / logging
+wandb/
+mlruns/
+outputs/
+runs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.swp
+*.swo
+*~

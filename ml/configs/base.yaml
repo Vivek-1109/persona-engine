@@ -1,0 +1,57 @@
+# =============================================================================
+# Persona Engine — Base Configuration
+# =============================================================================
+# This is the root configuration merged into every workflow.
+# Environment-specific overrides (paths, devices) happen at runtime.
+# =============================================================================
+
+project:
+  name: persona-engine
+  version: "0.1.0"
+  description: "Personalized Conversational AI — ML Foundation"
+
+# Runtime environment.  Overridden by notebooks / CLI.
+# Values: local | colab
+environment: local
+
+# ---------------------------------------------------------------------------
+# Paths  (relative to ml/ root unless prefixed with /)
+# ---------------------------------------------------------------------------
+paths:
+  data_root: data
+  raw_data: data/raw
+  processed_data: data/processed
+  annotated_data: data/annotated
+  training_data: data/training
+  evaluation_data: data/evaluation
+  sample_data: data/sample
+
+  models_root: models
+  base_models: models/base
+  adapters: models/adapters
+  checkpoints: models/checkpoints
+
+  experiments: experiments
+  configs: configs
+  schemas: schemas
+
+# ---------------------------------------------------------------------------
+# Model defaults  (placeholder — no download yet)
+# ---------------------------------------------------------------------------
+model:
+  name: "unsloth/Qwen2.5-1.5B"
+  revision: "main"
+  dtype: "float16"
+  max_length: 2048
+
+# ---------------------------------------------------------------------------
+# Random seed for reproducibility
+# ---------------------------------------------------------------------------
+seed: 42
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logging:
+  level: INFO
+  format: "%(asctime)s | %(name)-28s | %(levelname)-7s | %(message)s"

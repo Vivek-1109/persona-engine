@@ -1,0 +1,30 @@
+# Persona Engine — ML Dependencies (Google Colab GPU)
+# Install on top of Colab's pre-installed PyTorch + CUDA environment.
+# Usage:  pip install -r requirements-colab.txt
+
+# Core ML & Hugging Face Ecosystem
+transformers>=4.44
+datasets>=3.0
+accelerate>=0.34
+peft>=0.13
+bitsandbytes>=0.43
+sentencepiece>=0.2
+protobuf>=4.25
+
+# Sentence similarity / evaluation embeddings
+sentence-transformers>=3.0
+
+# Data Processing
+pandas>=2.1
+numpy>=1.26
+scikit-learn>=1.4
+
+# Configuration & Validation
+pyyaml>=6.0
+jsonschema>=4.20
+
+# Visualization
+matplotlib>=3.8
+
+# Utilities
+tqdm>=4.66

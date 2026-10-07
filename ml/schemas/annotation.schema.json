@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "persona-engine/annotation",
+  "title": "Persona Engine — Annotation Schema",
+  "description": "Schema for annotated conversation data.  Not every field is required at early stages; the pipeline should tolerate missing optional annotations gracefully.",
+  "type": "object",
+  "required": ["conversation_id", "messages"],
+  "properties": {
+    "conversation_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "persona_id": {
+      "type": "string"
+    },
+    "messages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["speaker", "text"],
+        "properties": {
+          "speaker": { "type": "string" },
+          "text": { "type": "string" },
+          "timestamp": { "type": ["string", "null"] },
+          "annotations": {
+            "type": "object",
+            "description": "Per-message annotation labels.",
+            "properties": {
+              "topic": { "type": "string" },
+              "intent": { "type": "string", "description": "e.g., question, statement, joke, request, vent, tease" },
+              "emotion": { "type": "string", "description": "e.g., happy, sad, frustrated, neutral, excited, anxious" },
+              "tone": { "type": "string", "description": "e.g., formal, casual, sarcastic, playful, serious" },
+              "humor": { "type": "boolean" },
+              "sarcasm": { "type": "boolean" },
+              "teasing": { "type": "boolean" },
+              "language": { "type": "string", "description": "e.g., en, hi, hinglish" },
+              "language_mixing": { "type": "boolean" },
+              "response_strategy": { "type": "string", "description": "e.g., DIRECT_ANSWER, FOLLOW_UP, TEASE, JOKE, SUPPORT" },
+              "relationship_context": { "type": "string", "description": "e.g., close_friend, acquaintance, formal" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}
