@@ -245,31 +245,53 @@ class PersonaTrainer:
         logger.info(f"Starting QLoRA training with {len(dataset)} examples...")
 
         try:
+            import inspect
             from trl import SFTConfig, SFTTrainer
 
-            training_args = SFTConfig(
-                output_dir=str(out_dir),
-                num_train_epochs=self.config.num_epochs,
-                per_device_train_batch_size=self.config.batch_size,
-                gradient_accumulation_steps=self.config.gradient_accumulation_steps,
-                learning_rate=self.config.learning_rate,
-                logging_steps=5,
-                save_strategy="epoch",
-                dataset_text_field="text",
-                max_seq_length=self.config.max_seq_length,
-                fp16=torch.cuda.is_available(),
-                bf16=False,
-                optim="paged_adamw_8bit" if torch.cuda.is_available() else "adamw_torch",
-                report_to="none",
-                seed=self.config.seed,
-            )
+            sft_sig = inspect.signature(SFTConfig.__init__).parameters
+            config_kwargs: Dict[str, Any] = {
+                "output_dir": str(out_dir),
+                "num_train_epochs": self.config.num_epochs,
+                "per_device_train_batch_size": self.config.batch_size,
+                "gradient_accumulation_steps": self.config.gradient_accumulation_steps,
+                "learning_rate": self.config.learning_rate,
+                "logging_steps": 5,
+                "save_strategy": "epoch",
+                "fp16": torch.cuda.is_available(),
+                "bf16": False,
+                "optim": "paged_adamw_8bit" if torch.cuda.is_available() else "adamw_torch",
+                "report_to": "none",
+                "seed": self.config.seed,
+            }
 
-            trainer = SFTTrainer(
-                model=self._model,
-                train_dataset=dataset,
-                tokenizer=self._tokenizer,
-                args=training_args,
-            )
+            # Compatibility across TRL versions (max_length vs max_seq_length)
+            if "max_length" in sft_sig:
+                config_kwargs["max_length"] = self.config.max_seq_length
+            elif "max_seq_length" in sft_sig:
+                config_kwargs["max_seq_length"] = self.config.max_seq_length
+
+            if "dataset_text_field" in sft_sig:
+                config_kwargs["dataset_text_field"] = "text"
+
+            training_args = SFTConfig(**config_kwargs)
+
+            trainer_sig = inspect.signature(SFTTrainer.__init__).parameters
+            trainer_kwargs: Dict[str, Any] = {
+                "model": self._model,
+                "train_dataset": dataset,
+                "args": training_args,
+            }
+
+            # Compatibility for tokenizer vs processing_class
+            if "processing_class" in trainer_sig:
+                trainer_kwargs["processing_class"] = self._tokenizer
+            elif "tokenizer" in trainer_sig:
+                trainer_kwargs["tokenizer"] = self._tokenizer
+
+            if "dataset_text_field" in trainer_sig and "dataset_text_field" not in config_kwargs:
+                trainer_kwargs["dataset_text_field"] = "text"
+
+            trainer = SFTTrainer(**trainer_kwargs)
 
             train_result = trainer.train()
             self.save_adapter(out_dir)
@@ -281,17 +303,22 @@ class PersonaTrainer:
                 "output_dir": str(out_dir),
             }
 
-        except ImportError:
+        except Exception as trl_err:
+            logger.warning(
+                f"TRL SFTTrainer initialization failed ({trl_err}). "
+                f"Falling back to standard Hugging Face Trainer."
+            )
             # Fallback to standard Hugging Face Trainer
             from transformers import DataCollatorForLanguageModeling, Trainer, TrainingArguments
 
             def tokenize_func(examples):
-                return self._tokenizer(
+                tokens = self._tokenizer(
                     examples["text"],
                     truncation=True,
                     max_length=self.config.max_seq_length,
-                    padding="max_length",
                 )
+                tokens["labels"] = [list(ids) for ids in tokens["input_ids"]]
+                return tokens
 
             tokenized_dataset = dataset.map(tokenize_func, batched=True)
 
