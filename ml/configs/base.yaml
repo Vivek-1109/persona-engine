@@ -39,7 +39,7 @@ paths:
 # Model defaults  (placeholder — no download yet)
 # ---------------------------------------------------------------------------
 model:
-  name: "unsloth/Qwen2.5-1.5B"
+  name: "Qwen/Qwen2.5-1.5B-Instruct"
   revision: "main"
   dtype: "float16"
   max_length: 2048

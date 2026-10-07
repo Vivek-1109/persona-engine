@@ -204,7 +204,7 @@ class TestMLFoundation(unittest.TestCase):
     def test_11_persona_generator_interface(self):
         """Verify generator lifecycle: load, generate, unload."""
         generator = PersonaGenerator()
-        generator.load_model()
+        generator.load_model(mock=True)
         self.assertTrue(generator.is_model_loaded)
 
         resp = generator.generate([{"speaker": "user", "text": "hello"}])
@@ -215,15 +215,15 @@ class TestMLFoundation(unittest.TestCase):
         self.assertFalse(generator.is_model_loaded)
 
     def test_12_persona_trainer_contract(self):
-        """Verify trainer interface contract raises NotImplementedError during foundation phase."""
+        """Verify trainer dataset preparation and dry-run lifecycle."""
         trainer = PersonaTrainer()
         sample_path = ml_root / "data" / "sample" / "sample_conversations.jsonl"
         status = trainer.prepare_dataset(sample_path)
         self.assertEqual(status["status"], "READY")
+        self.assertGreater(status["num_examples"], 0)
 
-        # train() must raise NotImplementedError in Phase 1 / ML foundation
-        with self.assertRaises(NotImplementedError):
-            trainer.train()
+        res = trainer.train(dry_run=True)
+        self.assertEqual(res["status"], "DRY_RUN_PASSED")
 
 
 if __name__ == "__main__":
