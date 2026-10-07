@@ -88,6 +88,7 @@ class PersonaGenerator:
                 self._model = AutoModelForCausalLM.from_pretrained(
                     target,
                     quantization_config=bnb_config,
+                    torch_dtype=torch.float16,
                     device_map="auto",
                     trust_remote_code=True,
                 )
@@ -160,8 +161,7 @@ class PersonaGenerator:
         # Build message turns
         formatted_messages = []
         sys_content = system_prompt or (
-            "You are Vivek. Respond in your learned natural conversational style, "
-            "humor, and casual Hinglish messaging as you do with friends."
+            "Respond in the learned communication style of the persona. Preserve natural Hinglish/casual messaging when appropriate."
         )
         formatted_messages.append({"role": "system", "content": sys_content})
 
@@ -169,7 +169,15 @@ class PersonaGenerator:
             role = m.get("role") or m.get("speaker") or "user"
             content = m.get("content") or m.get("text") or ""
             role_mapped = "assistant" if str(role).lower() in {"vivek", "persona", "assistant"} else "user"
-            formatted_messages.append({"role": role_mapped, "content": str(content)})
+
+            # Match training data speaker prefix (e.g., "Naata: ...") if provided
+            speaker_name = m.get("speaker")
+            if role_mapped == "user" and speaker_name and str(speaker_name).lower() not in {"user", "human"} and not str(content).startswith(f"{speaker_name}:"):
+                content_str = f"{speaker_name}: {content}"
+            else:
+                content_str = str(content)
+
+            formatted_messages.append({"role": role_mapped, "content": content_str})
 
         # Format prompt
         if hasattr(self._tokenizer, "apply_chat_template"):

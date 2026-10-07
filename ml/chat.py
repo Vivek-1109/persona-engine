@@ -63,6 +63,12 @@ def main():
         help="Run predefined benchmark prompts instead of interactive loop",
     )
     parser.add_argument(
+        "--prompt",
+        type=str,
+        default=None,
+        help="Single prompt to test Vivek's response directly",
+    )
+    parser.add_argument(
         "--temp",
         type=float,
         default=0.7,
@@ -77,8 +83,11 @@ def main():
     print(f"LoRA Adapter: {args.adapter}")
 
     adapter_path = Path(args.adapter)
-    if not adapter_path.is_absolute():
-        adapter_path = ml_root / args.adapter
+    if not adapter_path.exists():
+        if (ml_root / args.adapter).exists():
+            adapter_path = ml_root / args.adapter
+        elif (Path.cwd() / args.adapter).exists():
+            adapter_path = Path.cwd() / args.adapter
 
     generator = PersonaGenerator(
         base_model_name_or_path=args.model,
@@ -93,12 +102,28 @@ def main():
     else:
         print(f"NOTE: Adapter not found at '{adapter_path}'. Running base model zero-shot.")
 
+    if args.prompt:
+        params = GenerationParams(temperature=args.temp, max_new_tokens=100)
+        messages = [{"speaker": "Naata", "text": args.prompt}]
+        print(f"\n[Prompt from Naata]: {args.prompt}")
+        reply = generator.generate(messages, params=params)
+        print(f"[Vivek Response]: {reply}\n")
+        return
+
     if args.test_prompts:
         run_test_prompts(generator)
         return
 
-    # By default, run the test prompts first, then enter interactive mode
+    # By default, run the test prompts first
     run_test_prompts(generator)
+
+    # In non-interactive environments (e.g., Colab !python or CI pipe), exit gracefully
+    if not sys.stdin.isatty():
+        print("\n[NOTE] Non-interactive environment detected (Colab ! command).")
+        print("Benchmark evaluation completed. To chat with custom questions, run:")
+        print('  !python chat.py --adapter models/adapters/vivek_adapter --prompt "Bhai shaam ko kya scene hai?"')
+        print("Or use the interactive Python cell snippet.")
+        return
 
     print("\n" + "=" * 60)
     print("INTERACTIVE CHAT MODE (type 'exit' or 'quit' to end)")
