@@ -82,6 +82,7 @@ ml/data/evaluation/*
 !ml/data/processed/.gitkeep
 !ml/data/annotated/.gitkeep
 !ml/data/training/.gitkeep
+!ml/data/training/train.jsonl
 !ml/data/evaluation/.gitkeep
 !ml/data/sample/
 ml/models/base/*

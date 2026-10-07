@@ -62,6 +62,7 @@ data/evaluation/*
 !data/processed/.gitkeep
 !data/annotated/.gitkeep
 !data/training/.gitkeep
+!data/training/train.jsonl
 !data/evaluation/.gitkeep
 # Keep sample data
 !data/sample/
