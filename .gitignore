@@ -83,6 +83,8 @@ ml/data/evaluation/*
 !ml/data/annotated/.gitkeep
 !ml/data/training/.gitkeep
 !ml/data/training/train.jsonl
+!ml/data/training/sanity_train.jsonl
+!ml/data/training/sanity_val.jsonl
 !ml/data/evaluation/.gitkeep
 !ml/data/sample/
 ml/models/base/*

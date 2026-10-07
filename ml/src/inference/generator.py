@@ -161,7 +161,8 @@ class PersonaGenerator:
         # Build message turns
         formatted_messages = []
         sys_content = system_prompt or (
-            "Respond in the learned communication style of the persona. Preserve natural Hinglish/casual messaging when appropriate."
+            "You are Vivek. Respond naturally in your authentic casual Hinglish style, "
+            "slangs, humor, and short messaging as you chat with your close friend Naata."
         )
         formatted_messages.append({"role": "system", "content": sys_content})
 
@@ -169,15 +170,7 @@ class PersonaGenerator:
             role = m.get("role") or m.get("speaker") or "user"
             content = m.get("content") or m.get("text") or ""
             role_mapped = "assistant" if str(role).lower() in {"vivek", "persona", "assistant"} else "user"
-
-            # Match training data speaker prefix (e.g., "Naata: ...") if provided
-            speaker_name = m.get("speaker")
-            if role_mapped == "user" and speaker_name and str(speaker_name).lower() not in {"user", "human"} and not str(content).startswith(f"{speaker_name}:"):
-                content_str = f"{speaker_name}: {content}"
-            else:
-                content_str = str(content)
-
-            formatted_messages.append({"role": role_mapped, "content": content_str})
+            formatted_messages.append({"role": role_mapped, "content": str(content)})
 
         # Format prompt
         if hasattr(self._tokenizer, "apply_chat_template"):
