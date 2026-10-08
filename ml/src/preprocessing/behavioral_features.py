@@ -44,25 +44,26 @@ class BehavioralFeatures:
         return data
 
 
+EMOJI_REGEX = re.compile(
+    r"("
+    r"[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U00002B50-\U00002B55\U0001F600-\U0001F64F\U0001F680-\U0001F6FF]"
+    r"(?:[\U0001F3FB-\U0001F3FF]|\uFE0E|\uFE0F)?"
+    r"(?:\u200D[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U00002B50-\U00002B55\U0001F600-\U0001F64F\U0001F680-\U0001F6FF](?:[\U0001F3FB-\U0001F3FF]|\uFE0E|\uFE0F)?)*"
+    r")"
+)
+
+
 def extract_emojis(text: str) -> List[str]:
-    """Extracts all Unicode emoji characters from a string."""
-    found: List[str] = []
-    for char in text:
-        cp = ord(char)
-        if (
-            unicodedata.category(char) in ("So", "Sk")
-            or 0x1F300 <= cp <= 0x1FAFF
-            or 0x2600 <= cp <= 0x27BF
-            or 0x1F600 <= cp <= 0x1F64F
-            or 0x1F680 <= cp <= 0x1F6FF
-            or 0x2B50 <= cp <= 0x2B55
-        ):
-            found.append(char)
-    return found
+    """
+    Extracts Unicode emoji sequences from a string.
+    Correctly coalesces base emojis + skin tone modifiers (U+1F3FB..U+1F3FF),
+    variation selectors, and ZWJ sequences as single emoji grapheme units.
+    """
+    return EMOJI_REGEX.findall(text)
 
 
 def count_emojis(text: str) -> int:
-    """Counts the total number of Unicode emoji characters."""
+    """Counts the total number of Unicode emoji grapheme clusters."""
     return len(extract_emojis(text))
 
 
@@ -113,8 +114,6 @@ class BehavioralFeatureExtractor:
     # Humorous emojis and tokens
     LAUGH_EMOJIS: Set[str] = {"😂", "🤣", "😆", "😹", "💀", "😭"}
 
-
-
     @staticmethod
     def count_emojis(text: str) -> int:
         """Counts the total number of Unicode emoji characters."""
@@ -151,88 +150,158 @@ class BehavioralFeatureExtractor:
     def detect_tone(self, text: str, has_emoji: bool) -> str:
         """
         Detects conversational tone: casual, humorous, teasing, uncertain, supportive, serious, neutral.
+        Uses semantic lexical cues, affect, and stylistic markers rather than arbitrary string length.
         """
-        lower = text.lower()
+        stripped = text.strip()
+        lower = stripped.lower()
 
-        # 1. Humor
+        # 1. Teasing / Banter (explicit roast, profanity, peer insults)
+        teasing_keywords = [
+            "saale", "bsdk", "bencho", "chutiya", "lawda", "lauda", "pagle",
+            "chomu", "jhaatu", "kutta", "kamina", "bhadwe", "chudega", "chud gyi",
+            "teri maa", "gadhe", "andha hai"
+        ]
+        if any(w in lower for w in teasing_keywords):
+            return "teasing"
+
+        # 2. Humor (laugh emojis or explicit humor tokens)
         if any(e in text for e in self.LAUGH_EMOJIS) or any(
-            w in lower for w in ["lol", "lmao", "haha", "rofl", "chud gyi", "maze", "mazee"]
+            w in lower for w in ["lol", "lmao", "haha", "hahaha", "rofl", "xdd", "xd", "joke", "mazak", "hasna", "comedy"]
         ):
             return "humorous"
 
-        # 2. Teasing / Banter
-        if any(w in lower for w in ["saale", "bsdk", "bencho", "chutiya", "lawda", "lauda", "pagle", "bhag"]):
-            return "teasing"
-
-        # 3. Uncertainty
-        if any(w in lower for w in ["shayad", "maybe", "pata nhi", "ptani", "dekhna padega", "dekhta hu", "kya pata"]):
+        # 3. Uncertainty (hedging, doubt, speculation)
+        uncertain_keywords = [
+            "shayad", "maybe", "pata nhi", "ptani", "dekhna padega", "dekhta hu",
+            "kya pata", "probably", "not sure", "idk", "lagta hai", "doubt", "confirm nahi", "pakka nahi"
+        ]
+        if any(w in lower for w in uncertain_keywords):
             return "uncertain"
 
-        # 4. Supportive
-        if any(w in lower for w in ["tension mat", "ho jayega", "ho jaega", "badhiya", "mast", "congrats", "badhai"]):
+        # 4. Supportive (reassurance, encouragement, cheering, empathy)
+        supportive_keywords = [
+            "tension mat", "ho jayega", "ho jaega", "badhiya", "mast", "congrats",
+            "badhai", "chill kar", "koi na", "koi baat nahi", "all the best", "take care",
+            "shabash", "sahi kiya", "help chahiye", "well done", "sambhal lena"
+        ]
+        if any(w in lower for w in supportive_keywords):
             return "supportive"
 
-        # 5. Serious
-        if any(w in lower for w in ["death", "emergency", "hospital", "police", "fir", "accident", "rip", "serious"]):
+        # 5. Serious (emergencies, critical issues, deadlines, high-stakes matters)
+        serious_keywords = [
+            "death", "emergency", "hospital", "police", "fir", "accident", "rip",
+            "serious", "urgent", "zaroori", "jaruri", "deadline", "critical",
+            "strictly", "pareshan", "bimaari", "ill", "problem", "strict"
+        ]
+        if any(w in lower for w in serious_keywords):
             return "serious"
 
-        # 6. Neutral (very brief, direct answers without tone markers)
-        if len(text.strip()) <= 4 and not has_emoji:
+        # 6. Neutral (purely factual, matter-of-fact statements, numerical replies, direct objective answers)
+        # Check if text is devoid of informal slang, emojis, exclamations, and affective particles
+        is_numeric = bool(re.match(r"^[\d\:\.\s\/\-]+$", stripped))
+        has_slang_words = self.has_slang(stripped)
+        has_casual_particle = any(
+            re.search(rf"\b{re.escape(w)}\b", lower)
+            for w in ["bhai", "yaar", "yr", "bro", "chal", "aaja", "na", "re", "arre", "bhaiya", "sahi h"]
+        )
+        has_exclamation = "!" in stripped
+
+        if is_numeric:
             return "neutral"
+
+        if not has_emoji and not has_slang_words and not has_casual_particle and not has_exclamation:
+            # Objective confirmations or factual status remarks without peer markers
+            neutral_tokens = {
+                "ok", "ok.", "okh", "okhh", "theek", "theek.", "done", "done.",
+                "haan", "haan.", "ha", "nahi", "nhi", "yes", "no", "received", "available",
+                "sent", "sent.", "offline tha", "online hu", "link bhej diya"
+            }
+            if lower in neutral_tokens or lower.endswith("."):
+                return "neutral"
+            # Informational declarative sentences without slang or emotional coloring
+            if not any(w in lower for w in ["kya", "kyu", "bc", "bhai", "yaar"]):
+                return "neutral"
 
         return "casual"
 
     def detect_response_type(self, text: str, preceding_user_text: str = "") -> str:
         """
         Detects response type: answer, question, acknowledgement, refusal, reaction, greeting, invitation, suggestion, statement.
+        Determines answer vs statement using conversational context (preceding user inquiry) rather than word length.
         """
         stripped = text.strip()
         lower = stripped.lower()
 
-        # Pure reaction
+        # 1. Pure reaction (emojis only or pure punctuation)
         if self.count_emojis(stripped) > 0 and not re.search(r"[a-zA-Z0-9]", stripped):
             return "reaction"
         if stripped in {".", "..", "...", "!", "?", "?!", ":)"}:
             return "reaction"
 
-        # Question
-        if "?" in stripped or lower.startswith(("kya ", "kyu ", "kyun ", "kab ", "kaha ", "kahan ", "kaise ", "why ", "what ")):
+        # 2. Question
+        if self.is_question(stripped):
             return "question"
 
-        # Acknowledgement
+        # 3. Refusal
+        refusal_tokens = {
+            "nhi", "ni", "nahi", "nah", "no", "nope", "nhi bhai", "ni bhai",
+            "kabhi nhi", "na", "mat kar", "nhi yaar", "nahi aa paunga", "nahi hoga"
+        }
+        if lower in refusal_tokens or lower.startswith(("nhi ", "ni ", "nahi ", "nah ", "no ")):
+            return "refusal"
+
+        # 4. Invitation
+        invitation_tokens = {
+            "aaja", "aaja bhai", "chal", "chalo", "chale", "aa ja", "aao",
+            "aaja room pe", "aaja discord pe", "aaja lobby", "join kar"
+        }
+        if lower in invitation_tokens or lower.startswith(("aaja ", "chal ", "chalo ")):
+            return "invitation"
+
+        # 5. Suggestion / Directive
+        suggestion_phrases = [
+            "kar le", "kar lo", "krle", "dekh le", "ye kar", "aise kar",
+            "link se", "bhej diya", "download kar", "try kar", "bhej de", "bol de", "call kar"
+        ]
+        if any(w in lower for w in suggestion_phrases) and not lower.startswith(("kya", "kyu")):
+            return "suggestion"
+
+        # 6. Acknowledgement
         ack_tokens = {
             "haa", "haan", "ha", "hn", "haa bhai", "haan bhai", "ok", "okh", "okhh",
             "okk", "sahi h", "sahi hai", "thik", "thik h", "theek", "theek h", "theek hai",
             "thik hai", "theek hai bhai", "thik hai bhai", "ha theek hai", "ha theek hai bhai",
-            "haan theek hai", "haan theek hai bhai", "acha", "achha", "achha bhai",
+            "haan theek hai", "haan theek hai bhai", "ok theek hai", "ok theek hai bhai",
+            "ok thik hai", "ok thik hai bhai", "acha", "achha", "achha bhai",
             "hmm", "done", "done deal", "cool", "got it", "yup", "yes", "wahi", "sahi"
         }
-        if lower in ack_tokens:
+        if lower in ack_tokens or (any(lower.startswith(f"{t} ") for t in ["ok", "okh", "haa", "haan", "theek hai", "thik hai"]) and any(w in lower for w in ["theek", "thik", "sahi", "bhai"])):
             return "acknowledgement"
 
-        # Refusal
-        refusal_tokens = {
-            "nhi", "ni", "nahi", "nah", "no", "nope", "nhi bhai", "ni bhai",
-            "kabhi nhi", "na", "mat kar", "nhi yaar"
-        }
-        if lower in refusal_tokens or lower.startswith(("nhi ", "ni ", "nahi ")):
-            return "refusal"
-
-        # Greeting / Invitation
+        # 7. Greeting
         if lower in {"hi", "hello", "hey", "yo", "sup"}:
             return "greeting"
-        if lower in {"aaja", "aaja bhai", "chal", "chalo", "aa ja", "aao", "aaja room pe", "chale"}:
-            return "invitation"
 
-        # Suggestion
-        if any(w in lower for w in ["kar le", "kar lo", "krle", "dekh le", "ye kar", "aise kar", "link se", "bhej diya"]):
-            return "suggestion"
+        # 8. Answer vs. Statement (Determined by Preceding Context)
+        last_u = preceding_user_text.lower().strip()
+        is_preceding_inquiry = (
+            "?" in last_u
+            or any(
+                re.search(rf"\b{re.escape(w)}\b", last_u)
+                for w in [
+                    "kya", "kyu", "kyun", "kab", "kaha", "kahan", "kaise", "kidhar",
+                    "kon", "kaun", "kitna", "kitne", "kitni", "why", "what", "when",
+                    "where", "how", "who", "which", "khelega", "chalega", "aayega",
+                    "free hai", "bata", "batao", "bol", "bheja", "bhejo"
+                ]
+            )
+        )
+        is_answer_syntax = lower.startswith(("kyuki", "because", "isliye", "reason"))
 
-        # Statement / Answer
-        if len(stripped.split()) >= 6:
-            return "statement"
+        if is_preceding_inquiry or is_answer_syntax:
+            return "answer"
 
-        return "answer"
+        return "statement"
 
     def extract_response_length(self, text: str) -> ResponseLengthInfo:
         """

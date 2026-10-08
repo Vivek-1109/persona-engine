@@ -1,0 +1,33 @@
+{
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "train_dataset": "D:\\Freelance Projects\\Persona Engine\\ml\\data\\stage5\\training\\stage5_train.jsonl",
+  "val_dataset": "D:\\Freelance Projects\\Persona Engine\\ml\\data\\stage5\\training\\val.jsonl",
+  "test_dataset": "D:\\Freelance Projects\\Persona Engine\\ml\\data\\stage5\\training\\test.jsonl",
+  "train_examples": 3760,
+  "val_examples": 868,
+  "test_examples": 1310,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj"
+  ],
+  "epochs": 3,
+  "batch_size": 2,
+  "gradient_accumulation_steps": 4,
+  "effective_batch_size": 8,
+  "learning_rate": 0.0002,
+  "lr_scheduler": "cosine",
+  "warmup_steps": 71,
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "max_seq_length": 512,
+  "random_seed": 42,
+  "loss_masking": "assistant_only",
+  "best_epoch": 2,
+  "best_val_loss": 1.7645
+}

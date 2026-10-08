@@ -1,0 +1,440 @@
+{
+  "stage4_metrics": {
+    "cat_a_seen": {
+      "count": 20,
+      "exact_match_rate": 30.0,
+      "hinglish_rate": 100.0,
+      "casualness_rate": 100.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 5.4,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 100.0
+    },
+    "cat_b_val": {
+      "count": 20,
+      "exact_match_rate": 5.0,
+      "hinglish_rate": 85.0,
+      "casualness_rate": 90.0,
+      "emoji_rate": 15.0,
+      "avg_length_words": 6.4,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_c_test": {
+      "count": 20,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 85.0,
+      "casualness_rate": 90.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 6.8,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_d_multiturn": {
+      "count": 10,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 80.0,
+      "casualness_rate": 80.0,
+      "emoji_rate": 10.0,
+      "avg_length_words": 7.5,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_e_singleturn": {
+      "count": 10,
+      "exact_match_rate": 10.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 100.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 5.2,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_f_context_dependence": {
+      "count": 10,
+      "sensitivity_rate": 60.0
+    },
+    "cat_g_unseen_generalization": {
+      "count": 20,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 85.0,
+      "casualness_rate": 85.0,
+      "emoji_rate": 15.0,
+      "avg_length_words": 6.9,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    }
+  },
+  "stage5_metrics": {
+    "cat_a_seen": {
+      "count": 20,
+      "exact_match_rate": 35.0,
+      "hinglish_rate": 100.0,
+      "casualness_rate": 100.0,
+      "emoji_rate": 25.0,
+      "avg_length_words": 5.1,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 100.0
+    },
+    "cat_b_val": {
+      "count": 20,
+      "exact_match_rate": 5.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 95.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 5.8,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_c_test": {
+      "count": 20,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 95.0,
+      "emoji_rate": 25.0,
+      "avg_length_words": 6.1,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_d_multiturn": {
+      "count": 10,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 90.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 6.8,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_e_singleturn": {
+      "count": 10,
+      "exact_match_rate": 10.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 100.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 4.8,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    },
+    "cat_f_context_dependence": {
+      "count": 10,
+      "sensitivity_rate": 90.0
+    },
+    "cat_g_unseen_generalization": {
+      "count": 20,
+      "exact_match_rate": 0.0,
+      "hinglish_rate": 90.0,
+      "casualness_rate": 90.0,
+      "emoji_rate": 20.0,
+      "avg_length_words": 6.2,
+      "unrelated_rate": 0.0,
+      "memorization_rate": 0.0
+    }
+  },
+  "cat_f_samples": [
+    {
+      "prompt": "Aaja",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "user",
+          "content": "canteen me milte hai?"
+        },
+        {
+          "role": "assistant",
+          "content": "5 min me pohochta hu"
+        },
+        {
+          "role": "user",
+          "content": "Aaja"
+        }
+      ],
+      "expected_behavior": "Should acknowledge meeting at canteen rather than generic arrival",
+      "s4_standalone": "Aaya",
+      "s4_rich": "Aaya bhai",
+      "s5_standalone": "Aaya",
+      "s5_rich": "Canteen pe hi hu aaja"
+    },
+    {
+      "prompt": "Khelega?",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "user",
+          "content": "free hai kya abhi?"
+        },
+        {
+          "role": "assistant",
+          "content": "assignment submit kar raha tha"
+        },
+        {
+          "role": "user",
+          "content": "Khelega?"
+        }
+      ],
+      "expected_behavior": "Should respond in context of finishing assignment",
+      "s4_standalone": "Aaja",
+      "s4_rich": "Thodi der me batata hu",
+      "s5_standalone": "Aaja",
+      "s5_rich": "Assignment bas submit kar raha hu fir aata hu"
+    },
+    {
+      "prompt": "Game aaja",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "user",
+          "content": "dinner kar liya?"
+        },
+        {
+          "role": "assistant",
+          "content": "haa abhi kiya"
+        },
+        {
+          "role": "user",
+          "content": "Game aaja"
+        }
+      ],
+      "expected_behavior": "Should respond in context of post-dinner gaming readiness",
+      "s4_standalone": "Aaya",
+      "s4_rich": "On ho raha hai",
+      "s5_standalone": "Aaya",
+      "s5_rich": "Haa login kar raha hu aaja"
+    },
+    {
+      "prompt": "Thik",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "kal 12 baje nikalte hai"
+        },
+        {
+          "role": "user",
+          "content": "Thik"
+        }
+      ],
+      "expected_behavior": "Affirmation acknowledging tomorrow plan",
+      "s4_standalone": "Haa",
+      "s4_rich": "Thik",
+      "s5_standalone": "Haa",
+      "s5_rich": "Kal 12 baje milte hai"
+    },
+    {
+      "prompt": "Nhi bhai",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "user",
+          "content": "college aayega?"
+        },
+        {
+          "role": "user",
+          "content": "Nhi bhai"
+        }
+      ],
+      "expected_behavior": "Reaction to friend not coming to college",
+      "s4_standalone": "Kyu",
+      "s4_rich": "Kyu kya hua?",
+      "s5_standalone": "Kyu",
+      "s5_rich": "Kyu attendance ka scene nahi hai kya?"
+    },
+    {
+      "prompt": "Sahi h",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "acer nitro le liya maine"
+        },
+        {
+          "role": "user",
+          "content": "Sahi h"
+        }
+      ],
+      "expected_behavior": "Response about the laptop specs/rate",
+      "s4_standalone": "Haa",
+      "s4_rich": "Mast hai na",
+      "s5_standalone": "Haa",
+      "s5_rich": "Bhai mast deal mil gayi discount me"
+    },
+    {
+      "prompt": "Bsdk",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "terese acha to bot khelta hai"
+        },
+        {
+          "role": "user",
+          "content": "Bsdk"
+        }
+      ],
+      "expected_behavior": "Playful banter/teasing reply",
+      "s4_standalone": "Kya hua",
+      "s4_rich": "Tu chup reh \ud83d\ude02",
+      "s5_standalone": "Kya hua",
+      "s5_rich": "Sach to bola maine \ud83d\ude02"
+    },
+    {
+      "prompt": "Kya",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "ek baat sun"
+        },
+        {
+          "role": "user",
+          "content": "Kya"
+        }
+      ],
+      "expected_behavior": "Continuation of the story",
+      "s4_standalone": "Kuch nahi",
+      "s4_rich": "Kuch nahi chord",
+      "s5_standalone": "Kuch nahi",
+      "s5_rich": "Dean ne notice nikaala hai attendance ka"
+    },
+    {
+      "prompt": "Kaha",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "bahar nikal"
+        },
+        {
+          "role": "user",
+          "content": "Kaha"
+        }
+      ],
+      "expected_behavior": "Location specification (gate pe, canteen, room)",
+      "s4_standalone": "Room pe",
+      "s4_rich": "Bahar khada hu",
+      "s5_standalone": "Room pe",
+      "s5_rich": "Main main gate pe hu jaldi aa"
+    },
+    {
+      "prompt": "Aaya",
+      "rich_context": [
+        {
+          "role": "system",
+          "content": "You are reproducing the communication style of the persona."
+        },
+        {
+          "role": "assistant",
+          "content": "room pe kab tak aayega?"
+        },
+        {
+          "role": "user",
+          "content": "Aaya"
+        }
+      ],
+      "expected_behavior": "Short acknowledgement to arrival",
+      "s4_standalone": "Ok",
+      "s4_rich": "Jaldi aa",
+      "s5_standalone": "Ok",
+      "s5_rich": "Haa jaldi aa gate khula hai"
+    }
+  ],
+  "cat_g_samples": [
+    {
+      "category": "casual",
+      "prompt": "bhai kya scene hai aaj ka?",
+      "s4_response": "kuch nahi room pe hi hu",
+      "s5_response": "kuch nahi bhai room pe pada hu bore ho raha hu",
+      "verdict": "Stage 5 shows richer authentic nuance"
+    },
+    {
+      "category": "casual",
+      "prompt": "kuch naya bata bore ho raha hu",
+      "s4_response": "kya batau",
+      "s5_response": "chal canteen chalte hai thodi der",
+      "verdict": "Stage 5 proposes realistic hangout action"
+    },
+    {
+      "category": "gaming",
+      "prompt": "bgmi khelega ya valorant?",
+      "s4_response": "bgmi aaja",
+      "s5_response": "bgmi aaja squad ready hai",
+      "verdict": "Stage 5 accurately injects gaming squad terminology"
+    },
+    {
+      "category": "gaming",
+      "prompt": "granny me new update aaya hai dekh",
+      "s4_response": "dekhta hu",
+      "s5_response": "ruk download lagata hu abhi",
+      "verdict": "Stage 5 responds proactively with immediate slang"
+    },
+    {
+      "category": "college",
+      "prompt": "aaj attendance kitni lagayi sir ne?",
+      "s4_response": "pata nahi",
+      "s5_response": "bhai proxy lag gayi thi meri tu chinta mat kar",
+      "verdict": "Stage 5 accurately captures college persona behavior"
+    },
+    {
+      "category": "college",
+      "prompt": "kal exam ka admit card laya kya?",
+      "s4_response": "haa le aaya",
+      "s5_response": "haa print nikalwa liya library se",
+      "verdict": "Stage 5 provides specific contextual grounding"
+    },
+    {
+      "category": "plans",
+      "prompt": "weekend pe movie chalte hai konsi lagi hai?",
+      "s4_response": "chal",
+      "s5_response": "bhai new release dekhte hai ticket book kar le",
+      "verdict": "Stage 5 matches persona enthusiasm for cinema"
+    },
+    {
+      "category": "plans",
+      "prompt": "sham ko chai peene chale canteen?",
+      "s4_response": "haa chalte hai",
+      "s5_response": "5:30 baje nikalte hai canteen",
+      "verdict": "Stage 5 provides concrete time specification"
+    },
+    {
+      "category": "questions",
+      "prompt": "tera phone kaisa chal raha ab battery backup sahi hai?",
+      "s4_response": "theek hai",
+      "s5_response": "sahi chal raha hai bhai din bhar nikal deta hai",
+      "verdict": "Stage 5 natural colloquial explanation"
+    },
+    {
+      "category": "reactions",
+      "prompt": "bencho match haar gaye yaar \ud83d\ude2d",
+      "s4_response": "arre yaar",
+      "s5_response": "hadd hai bencho jeeta hua match haar gaye \ud83e\udd26\u200d\u2642\ufe0f",
+      "verdict": "Stage 5 mirrors emotional slang and reactive emoji"
+    }
+  ]
+}

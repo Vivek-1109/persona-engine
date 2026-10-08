@@ -1,0 +1,535 @@
+{
+  "timestamp": "2026-10-08T15:27:57.826891",
+  "summary": {
+    "movies": {
+      "count": 44,
+      "percentage": 0.74,
+      "mean_confidence": 0.669,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 3.58
+    },
+    "casual_chat": {
+      "count": 2700,
+      "percentage": 45.47,
+      "mean_confidence": 0.541,
+      "min_confidence": 0.2,
+      "max_confidence": 1.0,
+      "mean_score": 3.34
+    },
+    "plans": {
+      "count": 900,
+      "percentage": 15.16,
+      "mean_confidence": 0.669,
+      "min_confidence": 0.21,
+      "max_confidence": 1.0,
+      "mean_score": 3.97
+    },
+    "technology": {
+      "count": 614,
+      "percentage": 10.34,
+      "mean_confidence": 0.828,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.49
+    },
+    "gaming": {
+      "count": 694,
+      "percentage": 11.69,
+      "mean_confidence": 0.822,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.19
+    },
+    "other": {
+      "count": 199,
+      "percentage": 3.35,
+      "mean_confidence": 0.2,
+      "min_confidence": 0.2,
+      "max_confidence": 0.2,
+      "mean_score": 1.0
+    },
+    "social": {
+      "count": 415,
+      "percentage": 6.99,
+      "mean_confidence": 0.71,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 4.22
+    },
+    "college": {
+      "count": 229,
+      "percentage": 3.86,
+      "mean_confidence": 0.776,
+      "min_confidence": 0.26,
+      "max_confidence": 1.0,
+      "mean_score": 5.23
+    },
+    "sports": {
+      "count": 143,
+      "percentage": 2.41,
+      "mean_confidence": 0.819,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.05
+    }
+  },
+  "other_topic_missed_signals_count": 15,
+  "other_topic_missed_signals_sample": [
+    {
+      "conversation_id": "conv_0025",
+      "target_message_id": 715,
+      "target_response": "to ek baar usko bol de ki mujhe call kare",
+      "context_summary": [
+        "9718079720\nWhatsApp nhi h iska\nSOURAV BETA.vcf (file attached)"
+      ],
+      "suggested_topics": [
+        "social"
+      ]
+    },
+    {
+      "conversation_id": "conv_0205",
+      "target_message_id": 3234,
+      "target_response": "isko kaat de\ncross kar de",
+      "context_summary": [
+        "lage raho time to install mein lagega\nkaha atki",
+        "Finish pe"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0354",
+      "target_message_id": 4980,
+      "target_response": "want to waste some time",
+      "context_summary": [
+        "Haa bhai what's happened"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0578",
+      "target_message_id": 7822,
+      "target_response": "Bol mera koi kaam ruka ho to batao\nMain apna bhi to time dekhunga",
+      "context_summary": [
+        "8:30 ghante krne hote h"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0578",
+      "target_message_id": 7822,
+      "target_response": "Bol mera koi kaam ruka ho to batao\nMain apna bhi to time dekhunga",
+      "context_summary": [
+        "Maaki chut sir ko bol mera travelling ke time ka kya\nOr 8:30 kab se hua\nOr lunch time kyu hataya",
+        "8:30 ghante krne hote h"
+      ],
+      "suggested_topics": [
+        "college",
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0595",
+      "target_message_id": 8054,
+      "target_response": "prompt daal dunga kuch to kar hi dega :)\nmain gandwa developer",
+      "context_summary": [
+        "sir 🫡",
+        "itna to pta hi hona chahiye ke isse google crawl krega ke nhi"
+      ],
+      "suggested_topics": [
+        "college"
+      ]
+    },
+    {
+      "conversation_id": "conv_0618",
+      "target_message_id": 8460,
+      "target_response": "Tab to orr bhi mangaunga😋",
+      "context_summary": [
+        "koi na jaate time bhej degi wo"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0618",
+      "target_message_id": 8460,
+      "target_response": "Tab to orr bhi mangaunga😋",
+      "context_summary": [
+        "Photo maangi thi lekin abhi tak aaya nhi😭",
+        "koi na jaate time bhej degi wo"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0065",
+      "target_message_id": 1409,
+      "target_response": "Ab ho jaayega thodi der mein",
+      "context_summary": [
+        "Ok\nJab aana ho bata diyo",
+        "Kr diya tabb bhi nhi hua"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0132",
+      "target_message_id": 2400,
+      "target_response": "date or time bata diyo or number bhi de diyo kaam ho jaayega",
+      "context_summary": [
+        "Koi ni phir bhi krdio 👍"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0651",
+      "target_message_id": 9150,
+      "target_response": "Jaa naa lawde tere gaand marwane ka time ho gya",
+      "context_summary": [
+        "tu khud micro lund h lund"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0123",
+      "target_message_id": 2304,
+      "target_response": "Ab to upar aa gya call kariyo aake",
+      "context_summary": [
+        "Rukja bhai"
+      ],
+      "suggested_topics": [
+        "social"
+      ]
+    },
+    {
+      "conversation_id": "conv_0123",
+      "target_message_id": 2304,
+      "target_response": "Ab to upar aa gya call kariyo aake",
+      "context_summary": [
+        "Bhen ke lode main neeche khada hu ki kab aao\nScooty side karke",
+        "Rukja bhai"
+      ],
+      "suggested_topics": [
+        "plans",
+        "social"
+      ]
+    },
+    {
+      "conversation_id": "conv_0646",
+      "target_message_id": 9113,
+      "target_response": "Arrow ka matlab time ke hisaab se",
+      "context_summary": [
+        "ispe research krke dekh kaisa h ye ?"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    },
+    {
+      "conversation_id": "conv_0646",
+      "target_message_id": 9113,
+      "target_response": "Arrow ka matlab time ke hisaab se",
+      "context_summary": [
+        "Dekh lo bhai",
+        "ispe research krke dekh kaisa h ye ?"
+      ],
+      "suggested_topics": [
+        "plans"
+      ]
+    }
+  ],
+  "ambiguous_benchmark_topic_distribution": [
+    {
+      "prompt": "Aaja",
+      "variant_count": 10,
+      "total_occurrences": 52,
+      "topics_distribution": {
+        "plans": 8,
+        "technology": 1,
+        "gaming": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        },
+        {
+          "target": "5 minute\nRaaste mein hu jaake aata hu",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        },
+        {
+          "target": "Cumming",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Bhai",
+      "variant_count": 4,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 4
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        },
+        {
+          "target": "call hai",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        },
+        {
+          "target": "Aayo",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Game M",
+      "variant_count": 4,
+      "total_occurrences": 8,
+      "topics_distribution": {
+        "gaming": 4
+      },
+      "variants_sample": [
+        {
+          "target": "Aaya",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        },
+        {
+          "target": "5 minutes bas aaya",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        },
+        {
+          "target": "Bhai abhi khana Mila hai khaa ke aata hu",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Re",
+      "variant_count": 3,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 2,
+        "technology": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Yes boss",
+          "topic": "plans",
+          "context": [
+            "Aaja re"
+          ]
+        },
+        {
+          "target": "Phone charge kar raha hu 30 hai",
+          "topic": "technology",
+          "context": [
+            "Aaja re"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja re"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Game Aaja",
+      "variant_count": 2,
+      "total_occurrences": 3,
+      "topics_distribution": {
+        "gaming": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "gaming",
+          "context": [
+            "Game aaja"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "gaming",
+          "context": [
+            "Game aaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Be",
+      "variant_count": 2,
+      "total_occurrences": 4,
+      "topics_distribution": {
+        "casual_chat": 1,
+        "plans": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Bsdk",
+          "topic": "casual_chat",
+          "context": [
+            "Aaja be"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja be"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Bhadwe",
+      "variant_count": 2,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 2
+      },
+      "variants_sample": [
+        {
+          "target": "On ho raha hai",
+          "topic": "plans",
+          "context": [
+            "Aaja bhadwe"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja bhadwe"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Lawde Aaja",
+      "variant_count": 2,
+      "total_occurrences": 5,
+      "topics_distribution": {
+        "plans": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Isme jyada mazaa hai🤤",
+          "topic": "plans",
+          "context": [
+            "Lawde\nAaja"
+          ]
+        },
+        {
+          "target": "Neend aa rahi hai🥲\nNaashte ke baad\nBol",
+          "topic": "plans",
+          "context": [
+            "Lawde\nAaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Khelega",
+      "variant_count": 10,
+      "total_occurrences": 36,
+      "topics_distribution": {
+        "gaming": 10
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "gaming",
+          "context": [
+            "Khelega"
+          ]
+        },
+        {
+          "target": "Aata hu 6:30 tak",
+          "topic": "gaming",
+          "context": [
+            "Khelega ?"
+          ]
+        },
+        {
+          "target": "Market Jaa Raha hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Khelega Kya",
+      "variant_count": 2,
+      "total_occurrences": 2,
+      "topics_distribution": {
+        "gaming": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Abhi to college mein hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega kya"
+          ]
+        },
+        {
+          "target": "Abhi college mein hu jaake message karta hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega kya"
+          ]
+        }
+      ]
+    }
+  ]
+}

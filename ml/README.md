@@ -287,3 +287,22 @@ To re-run the full Stage 5 dataset audit and generate the report:
 python ml/scripts/audit_stage5_dataset.py
 ```
 
+---
+
+## 10. Stage 5 Inference Service
+
+The Stage 5 Persona Model (`stage5_v1`) is frozen as the current baseline persona model and served via a standalone FastAPI inference microservice (`ml/service/`).
+
+### Quick Start
+```bash
+uvicorn ml.service.main:app --host 0.0.0.0 --port 8001
+```
+
+### Endpoints
+- `GET /health`: Service process health check.
+- `GET /ready`: Model load and readiness status.
+- `POST /generate`: Multi-turn conversational text generation.
+
+See [ml/service/README.md](service/README.md) for full architecture, schema details, and request examples.
+
+

@@ -1,0 +1,30 @@
+{
+  "model_name": "Qwen/Qwen2.5-1.5B-Instruct",
+  "train_duration_seconds": 1240.5,
+  "epoch_eval_history": [
+    {
+      "epoch": 1,
+      "step": 470,
+      "train_loss": 1.745,
+      "eval_loss": 1.832
+    },
+    {
+      "epoch": 2,
+      "step": 940,
+      "train_loss": 1.521,
+      "eval_loss": 1.7645
+    },
+    {
+      "epoch": 3,
+      "step": 1410,
+      "train_loss": 1.412,
+      "eval_loss": 1.778
+    }
+  ],
+  "best_epoch_info": {
+    "best_epoch": 2,
+    "best_val_loss": 1.7645,
+    "final_val_loss": 1.778,
+    "final_train_loss": 1.412
+  }
+}

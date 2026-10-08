@@ -1,0 +1,1353 @@
+{
+  "summary": {
+    "total_cases": 65,
+    "category_counts": {
+      "casual_conversation": 4,
+      "gaming": 4,
+      "college": 4,
+      "technology": 4,
+      "movies": 4,
+      "planning": 4,
+      "social": 4,
+      "ambiguous_short_messages": 4,
+      "multi_turn_context": 5,
+      "memory_dependent": 4,
+      "memory_irrelevant": 4,
+      "closing": 4,
+      "disagreement_rejection": 4,
+      "questions": 4,
+      "invitations": 4,
+      "unseen_generalization": 4
+    },
+    "topic_accuracy": 0.8154,
+    "intent_accuracy": 1.0,
+    "strategy_accuracy": 0.9231,
+    "ambiguity_accuracy": 1.0,
+    "memory_precision": 1.0,
+    "memory_recall": 0.7692,
+    "memory_contamination_rate": 0.0,
+    "memory_utilization_rate": 0.4615,
+    "hinglish_rate": 1.0,
+    "slang_rate": 0.6615,
+    "emoji_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "length_distribution": {
+      "mean": 7.85,
+      "median": 8.0,
+      "p25": 7.0,
+      "p75": 9.0,
+      "p90": 10.0,
+      "p95": 10.8,
+      "max": 11.0
+    },
+    "latency_summary": {
+      "context_ms": {
+        "mean": 0.38,
+        "median": 0.27,
+        "p25": 0.22,
+        "p75": 0.4,
+        "p90": 0.49,
+        "p95": 0.85,
+        "max": 3.13
+      },
+      "memory_ms": {
+        "mean": 0.37,
+        "median": 0.36,
+        "p25": 0.35,
+        "p75": 0.37,
+        "p90": 0.4,
+        "p95": 0.42,
+        "max": 0.62
+      },
+      "orchestrator_ms": {
+        "mean": 0.04,
+        "median": 0.03,
+        "p25": 0.02,
+        "p75": 0.04,
+        "p90": 0.05,
+        "p95": 0.07,
+        "max": 0.17
+      },
+      "generation_ms": {
+        "mean": 0.0,
+        "median": 0.0,
+        "p25": 0.0,
+        "p75": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      },
+      "total_ms": {
+        "mean": 0.79,
+        "median": 0.7,
+        "p25": 0.62,
+        "p75": 0.81,
+        "p90": 0.92,
+        "p95": 1.37,
+        "max": 3.59
+      }
+    },
+    "category_metrics": {
+      "casual_conversation": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "gaming": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 0.5,
+        "memory_accuracy": 1.0
+      },
+      "college": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "technology": {
+        "count": 4.0,
+        "topic_accuracy": 0.75,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 0.75
+      },
+      "movies": {
+        "count": 4.0,
+        "topic_accuracy": 0.75,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 0.75
+      },
+      "planning": {
+        "count": 4.0,
+        "topic_accuracy": 0.75,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "social": {
+        "count": 4.0,
+        "topic_accuracy": 0.75,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 0.75,
+        "memory_accuracy": 0.75
+      },
+      "ambiguous_short_messages": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "multi_turn_context": {
+        "count": 5.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "memory_dependent": {
+        "count": 4.0,
+        "topic_accuracy": 0.5,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 0.5
+      },
+      "memory_irrelevant": {
+        "count": 4.0,
+        "topic_accuracy": 0.75,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "closing": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "disagreement_rejection": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 0.75,
+        "memory_accuracy": 1.0
+      },
+      "questions": {
+        "count": 4.0,
+        "topic_accuracy": 0.5,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 0.5
+      },
+      "invitations": {
+        "count": 4.0,
+        "topic_accuracy": 1.0,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 1.0,
+        "memory_accuracy": 1.0
+      },
+      "unseen_generalization": {
+        "count": 4.0,
+        "topic_accuracy": 0.25,
+        "intent_accuracy": 1.0,
+        "strategy_accuracy": 0.75,
+        "memory_accuracy": 0.5
+      }
+    },
+    "error_breakdown": {
+      "CONTEXT_ERROR": 12,
+      "INTENT_ERROR": 0,
+      "MEMORY_RETRIEVAL_ERROR": 9,
+      "MEMORY_CONTAMINATION": 0,
+      "STRATEGY_ERROR": 5,
+      "PERSONA_STYLE_ERROR": 0,
+      "GENERATION_ERROR": 0,
+      "HALLUCINATION": 0,
+      "UNSUPPORTED_CLAIM": 0,
+      "OTHER": 0
+    }
+  },
+  "baseline_comparison": {
+    "topic_accuracy": {
+      "full_system": 0.8154,
+      "baseline": 0.2615,
+      "delta": 0.5539
+    },
+    "intent_accuracy": {
+      "full_system": 1.0,
+      "baseline": 0.0,
+      "delta": 1.0
+    },
+    "strategy_accuracy": {
+      "full_system": 0.9231,
+      "baseline": 0.1692,
+      "delta": 0.7539
+    },
+    "ambiguity_accuracy": {
+      "full_system": 1.0,
+      "baseline": 0.0,
+      "delta": 1.0
+    },
+    "memory_precision": {
+      "full_system": 1.0,
+      "baseline": 1.0,
+      "delta": 0.0
+    },
+    "memory_recall": {
+      "full_system": 0.7692,
+      "baseline": 0.0,
+      "delta": 0.7692
+    },
+    "memory_contamination_rate": {
+      "full_system": 0.0,
+      "baseline": 0.0,
+      "delta": 0.0
+    },
+    "hinglish_rate": {
+      "full_system": 1.0,
+      "baseline": 1.0,
+      "delta": 0.0
+    },
+    "slang_rate": {
+      "full_system": 0.6615,
+      "baseline": 1.0,
+      "delta": -0.3385
+    },
+    "hallucination_rate": {
+      "full_system": 0.0,
+      "baseline": 0.0,
+      "delta": 0.0
+    },
+    "mean_total_latency_ms": {
+      "full_system": 0.76,
+      "baseline": 0.01,
+      "delta": 0.75
+    }
+  },
+  "ablation_sweep": {
+    "full_system": {
+      "total_cases": 65,
+      "category_counts": {
+        "casual_conversation": 4,
+        "gaming": 4,
+        "college": 4,
+        "technology": 4,
+        "movies": 4,
+        "planning": 4,
+        "social": 4,
+        "ambiguous_short_messages": 4,
+        "multi_turn_context": 5,
+        "memory_dependent": 4,
+        "memory_irrelevant": 4,
+        "closing": 4,
+        "disagreement_rejection": 4,
+        "questions": 4,
+        "invitations": 4,
+        "unseen_generalization": 4
+      },
+      "topic_accuracy": 0.8154,
+      "intent_accuracy": 1.0,
+      "strategy_accuracy": 0.9231,
+      "ambiguity_accuracy": 1.0,
+      "memory_precision": 1.0,
+      "memory_recall": 0.7692,
+      "memory_contamination_rate": 0.0,
+      "memory_utilization_rate": 0.4615,
+      "hinglish_rate": 1.0,
+      "slang_rate": 0.6615,
+      "emoji_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "length_distribution": {
+        "mean": 7.85,
+        "median": 8.0,
+        "p25": 7.0,
+        "p75": 9.0,
+        "p90": 10.0,
+        "p95": 10.8,
+        "max": 11.0
+      },
+      "latency_summary": {
+        "context_ms": {
+          "mean": 0.34,
+          "median": 0.27,
+          "p25": 0.22,
+          "p75": 0.38,
+          "p90": 0.49,
+          "p95": 0.56,
+          "max": 1.74
+        },
+        "memory_ms": {
+          "mean": 0.36,
+          "median": 0.35,
+          "p25": 0.35,
+          "p75": 0.36,
+          "p90": 0.39,
+          "p95": 0.4,
+          "max": 0.46
+        },
+        "orchestrator_ms": {
+          "mean": 0.03,
+          "median": 0.03,
+          "p25": 0.02,
+          "p75": 0.03,
+          "p90": 0.03,
+          "p95": 0.04,
+          "max": 0.13
+        },
+        "generation_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.01
+        },
+        "total_ms": {
+          "mean": 0.73,
+          "median": 0.67,
+          "p25": 0.61,
+          "p75": 0.77,
+          "p90": 0.88,
+          "p95": 0.97,
+          "max": 2.14
+        }
+      },
+      "category_metrics": {
+        "casual_conversation": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "gaming": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 1.0
+        },
+        "college": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "technology": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.75
+        },
+        "movies": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.75
+        },
+        "planning": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "social": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.75
+        },
+        "ambiguous_short_messages": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "multi_turn_context": {
+          "count": 5.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "memory_dependent": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.5
+        },
+        "memory_irrelevant": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "closing": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "disagreement_rejection": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 1.0
+        },
+        "questions": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.5
+        },
+        "invitations": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "unseen_generalization": {
+          "count": 4.0,
+          "topic_accuracy": 0.25,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.5
+        }
+      },
+      "error_breakdown": {
+        "CONTEXT_ERROR": 12,
+        "INTENT_ERROR": 0,
+        "MEMORY_RETRIEVAL_ERROR": 9,
+        "MEMORY_CONTAMINATION": 0,
+        "STRATEGY_ERROR": 5,
+        "PERSONA_STYLE_ERROR": 0,
+        "GENERATION_ERROR": 0,
+        "HALLUCINATION": 0,
+        "UNSUPPORTED_CLAIM": 0,
+        "OTHER": 0
+      }
+    },
+    "no_memory": {
+      "total_cases": 65,
+      "category_counts": {
+        "casual_conversation": 4,
+        "gaming": 4,
+        "college": 4,
+        "technology": 4,
+        "movies": 4,
+        "planning": 4,
+        "social": 4,
+        "ambiguous_short_messages": 4,
+        "multi_turn_context": 5,
+        "memory_dependent": 4,
+        "memory_irrelevant": 4,
+        "closing": 4,
+        "disagreement_rejection": 4,
+        "questions": 4,
+        "invitations": 4,
+        "unseen_generalization": 4
+      },
+      "topic_accuracy": 0.8154,
+      "intent_accuracy": 1.0,
+      "strategy_accuracy": 0.9231,
+      "ambiguity_accuracy": 1.0,
+      "memory_precision": 1.0,
+      "memory_recall": 0.0,
+      "memory_contamination_rate": 0.0,
+      "memory_utilization_rate": 0.0,
+      "hinglish_rate": 1.0,
+      "slang_rate": 0.6615,
+      "emoji_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "length_distribution": {
+        "mean": 7.85,
+        "median": 8.0,
+        "p25": 7.0,
+        "p75": 9.0,
+        "p90": 10.0,
+        "p95": 10.8,
+        "max": 11.0
+      },
+      "latency_summary": {
+        "context_ms": {
+          "mean": 0.35,
+          "median": 0.27,
+          "p25": 0.22,
+          "p75": 0.37,
+          "p90": 0.45,
+          "p95": 0.62,
+          "max": 1.72
+        },
+        "memory_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "orchestrator_ms": {
+          "mean": 0.02,
+          "median": 0.02,
+          "p25": 0.02,
+          "p75": 0.02,
+          "p90": 0.02,
+          "p95": 0.03,
+          "max": 0.06
+        },
+        "generation_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "total_ms": {
+          "mean": 0.37,
+          "median": 0.29,
+          "p25": 0.24,
+          "p75": 0.39,
+          "p90": 0.47,
+          "p95": 0.68,
+          "max": 1.78
+        }
+      },
+      "category_metrics": {
+        "casual_conversation": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "gaming": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.0
+        },
+        "college": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.0
+        },
+        "technology": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.0
+        },
+        "movies": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.0
+        },
+        "planning": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "social": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.75
+        },
+        "ambiguous_short_messages": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.75
+        },
+        "multi_turn_context": {
+          "count": 5.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.2
+        },
+        "memory_dependent": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.0
+        },
+        "memory_irrelevant": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "closing": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "disagreement_rejection": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.5
+        },
+        "questions": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.0
+        },
+        "invitations": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.25
+        },
+        "unseen_generalization": {
+          "count": 4.0,
+          "topic_accuracy": 0.25,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.0
+        }
+      },
+      "error_breakdown": {
+        "CONTEXT_ERROR": 12,
+        "INTENT_ERROR": 0,
+        "MEMORY_RETRIEVAL_ERROR": 39,
+        "MEMORY_CONTAMINATION": 0,
+        "STRATEGY_ERROR": 5,
+        "PERSONA_STYLE_ERROR": 0,
+        "GENERATION_ERROR": 0,
+        "HALLUCINATION": 0,
+        "UNSUPPORTED_CLAIM": 0,
+        "OTHER": 0
+      }
+    },
+    "no_context": {
+      "total_cases": 65,
+      "category_counts": {
+        "casual_conversation": 4,
+        "gaming": 4,
+        "college": 4,
+        "technology": 4,
+        "movies": 4,
+        "planning": 4,
+        "social": 4,
+        "ambiguous_short_messages": 4,
+        "multi_turn_context": 5,
+        "memory_dependent": 4,
+        "memory_irrelevant": 4,
+        "closing": 4,
+        "disagreement_rejection": 4,
+        "questions": 4,
+        "invitations": 4,
+        "unseen_generalization": 4
+      },
+      "topic_accuracy": 0.2615,
+      "intent_accuracy": 0.0,
+      "strategy_accuracy": 0.2462,
+      "ambiguity_accuracy": 0.25,
+      "memory_precision": 1.0,
+      "memory_recall": 0.0,
+      "memory_contamination_rate": 0.0,
+      "memory_utilization_rate": 0.0,
+      "hinglish_rate": 1.0,
+      "slang_rate": 1.0,
+      "emoji_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "length_distribution": {
+        "mean": 7.22,
+        "median": 7.0,
+        "p25": 7.0,
+        "p75": 7.0,
+        "p90": 7.0,
+        "p95": 10.2,
+        "max": 11.0
+      },
+      "latency_summary": {
+        "context_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.01,
+          "max": 0.01
+        },
+        "memory_ms": {
+          "mean": 0.36,
+          "median": 0.35,
+          "p25": 0.34,
+          "p75": 0.36,
+          "p90": 0.4,
+          "p95": 0.46,
+          "max": 0.52
+        },
+        "orchestrator_ms": {
+          "mean": 0.02,
+          "median": 0.02,
+          "p25": 0.02,
+          "p75": 0.02,
+          "p90": 0.03,
+          "p95": 0.03,
+          "max": 0.06
+        },
+        "generation_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.01
+        },
+        "total_ms": {
+          "mean": 0.39,
+          "median": 0.38,
+          "p25": 0.37,
+          "p75": 0.39,
+          "p90": 0.44,
+          "p95": 0.51,
+          "max": 0.57
+        }
+      },
+      "category_metrics": {
+        "casual_conversation": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 1.0
+        },
+        "gaming": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.0
+        },
+        "college": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "technology": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "movies": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 0.0
+        },
+        "planning": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 1.0
+        },
+        "social": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.75
+        },
+        "ambiguous_short_messages": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 0.75
+        },
+        "multi_turn_context": {
+          "count": 5.0,
+          "topic_accuracy": 0.2,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.2
+        },
+        "memory_dependent": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "memory_irrelevant": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 1.0
+        },
+        "closing": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "disagreement_rejection": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.5
+        },
+        "questions": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "invitations": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.25
+        },
+        "unseen_generalization": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 0.0
+        }
+      },
+      "error_breakdown": {
+        "CONTEXT_ERROR": 48,
+        "INTENT_ERROR": 65,
+        "MEMORY_RETRIEVAL_ERROR": 39,
+        "MEMORY_CONTAMINATION": 0,
+        "STRATEGY_ERROR": 49,
+        "PERSONA_STYLE_ERROR": 0,
+        "GENERATION_ERROR": 0,
+        "HALLUCINATION": 0,
+        "UNSUPPORTED_CLAIM": 0,
+        "OTHER": 0
+      }
+    },
+    "no_orchestrator": {
+      "total_cases": 65,
+      "category_counts": {
+        "casual_conversation": 4,
+        "gaming": 4,
+        "college": 4,
+        "technology": 4,
+        "movies": 4,
+        "planning": 4,
+        "social": 4,
+        "ambiguous_short_messages": 4,
+        "multi_turn_context": 5,
+        "memory_dependent": 4,
+        "memory_irrelevant": 4,
+        "closing": 4,
+        "disagreement_rejection": 4,
+        "questions": 4,
+        "invitations": 4,
+        "unseen_generalization": 4
+      },
+      "topic_accuracy": 0.8154,
+      "intent_accuracy": 1.0,
+      "strategy_accuracy": 0.9231,
+      "ambiguity_accuracy": 1.0,
+      "memory_precision": 1.0,
+      "memory_recall": 0.7692,
+      "memory_contamination_rate": 0.0,
+      "memory_utilization_rate": 0.4615,
+      "hinglish_rate": 1.0,
+      "slang_rate": 0.6615,
+      "emoji_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "length_distribution": {
+        "mean": 7.85,
+        "median": 8.0,
+        "p25": 7.0,
+        "p75": 9.0,
+        "p90": 10.0,
+        "p95": 10.8,
+        "max": 11.0
+      },
+      "latency_summary": {
+        "context_ms": {
+          "mean": 0.34,
+          "median": 0.26,
+          "p25": 0.23,
+          "p75": 0.39,
+          "p90": 0.5,
+          "p95": 0.6,
+          "max": 1.69
+        },
+        "memory_ms": {
+          "mean": 0.37,
+          "median": 0.35,
+          "p25": 0.35,
+          "p75": 0.37,
+          "p90": 0.39,
+          "p95": 0.43,
+          "max": 0.72
+        },
+        "orchestrator_ms": {
+          "mean": 0.03,
+          "median": 0.03,
+          "p25": 0.03,
+          "p75": 0.03,
+          "p90": 0.04,
+          "p95": 0.04,
+          "max": 0.06
+        },
+        "generation_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.01
+        },
+        "total_ms": {
+          "mean": 0.75,
+          "median": 0.67,
+          "p25": 0.61,
+          "p75": 0.8,
+          "p90": 0.89,
+          "p95": 1.27,
+          "max": 2.18
+        }
+      },
+      "category_metrics": {
+        "casual_conversation": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "gaming": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 1.0
+        },
+        "college": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "technology": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.75
+        },
+        "movies": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.75
+        },
+        "planning": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "social": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.75
+        },
+        "ambiguous_short_messages": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "multi_turn_context": {
+          "count": 5.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "memory_dependent": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.5
+        },
+        "memory_irrelevant": {
+          "count": 4.0,
+          "topic_accuracy": 0.75,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "closing": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "disagreement_rejection": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 1.0
+        },
+        "questions": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 0.5
+        },
+        "invitations": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 1.0,
+          "memory_accuracy": 1.0
+        },
+        "unseen_generalization": {
+          "count": 4.0,
+          "topic_accuracy": 0.25,
+          "intent_accuracy": 1.0,
+          "strategy_accuracy": 0.75,
+          "memory_accuracy": 0.5
+        }
+      },
+      "error_breakdown": {
+        "CONTEXT_ERROR": 12,
+        "INTENT_ERROR": 0,
+        "MEMORY_RETRIEVAL_ERROR": 9,
+        "MEMORY_CONTAMINATION": 0,
+        "STRATEGY_ERROR": 5,
+        "PERSONA_STYLE_ERROR": 0,
+        "GENERATION_ERROR": 0,
+        "HALLUCINATION": 0,
+        "UNSUPPORTED_CLAIM": 0,
+        "OTHER": 0
+      }
+    },
+    "persona_only": {
+      "total_cases": 65,
+      "category_counts": {
+        "casual_conversation": 4,
+        "gaming": 4,
+        "college": 4,
+        "technology": 4,
+        "movies": 4,
+        "planning": 4,
+        "social": 4,
+        "ambiguous_short_messages": 4,
+        "multi_turn_context": 5,
+        "memory_dependent": 4,
+        "memory_irrelevant": 4,
+        "closing": 4,
+        "disagreement_rejection": 4,
+        "questions": 4,
+        "invitations": 4,
+        "unseen_generalization": 4
+      },
+      "topic_accuracy": 0.2615,
+      "intent_accuracy": 0.0,
+      "strategy_accuracy": 0.1692,
+      "ambiguity_accuracy": 0.0,
+      "memory_precision": 1.0,
+      "memory_recall": 0.0,
+      "memory_contamination_rate": 0.0,
+      "memory_utilization_rate": 0.0,
+      "hinglish_rate": 1.0,
+      "slang_rate": 1.0,
+      "emoji_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "length_distribution": {
+        "mean": 7.0,
+        "median": 7.0,
+        "p25": 7.0,
+        "p75": 7.0,
+        "p90": 7.0,
+        "p95": 7.0,
+        "max": 7.0
+      },
+      "latency_summary": {
+        "context_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.01
+        },
+        "memory_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "orchestrator_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "generation_ms": {
+          "mean": 0.0,
+          "median": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p90": 0.0,
+          "p95": 0.0,
+          "max": 0.01
+        },
+        "total_ms": {
+          "mean": 0.01,
+          "median": 0.01,
+          "p25": 0.01,
+          "p75": 0.01,
+          "p90": 0.01,
+          "p95": 0.01,
+          "max": 0.02
+        }
+      },
+      "category_metrics": {
+        "casual_conversation": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 1.0
+        },
+        "gaming": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.0
+        },
+        "college": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "technology": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "movies": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 0.0
+        },
+        "planning": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 1.0
+        },
+        "social": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.75
+        },
+        "ambiguous_short_messages": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.75
+        },
+        "multi_turn_context": {
+          "count": 5.0,
+          "topic_accuracy": 0.2,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.2
+        },
+        "memory_dependent": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "memory_irrelevant": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 1.0
+        },
+        "closing": {
+          "count": 4.0,
+          "topic_accuracy": 1.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 1.0
+        },
+        "disagreement_rejection": {
+          "count": 4.0,
+          "topic_accuracy": 0.5,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.5,
+          "memory_accuracy": 0.5
+        },
+        "questions": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.0
+        },
+        "invitations": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.0,
+          "memory_accuracy": 0.25
+        },
+        "unseen_generalization": {
+          "count": 4.0,
+          "topic_accuracy": 0.0,
+          "intent_accuracy": 0.0,
+          "strategy_accuracy": 0.25,
+          "memory_accuracy": 0.0
+        }
+      },
+      "error_breakdown": {
+        "CONTEXT_ERROR": 48,
+        "INTENT_ERROR": 65,
+        "MEMORY_RETRIEVAL_ERROR": 39,
+        "MEMORY_CONTAMINATION": 0,
+        "STRATEGY_ERROR": 54,
+        "PERSONA_STYLE_ERROR": 0,
+        "GENERATION_ERROR": 0,
+        "HALLUCINATION": 0,
+        "UNSUPPORTED_CLAIM": 0,
+        "OTHER": 0
+      }
+    }
+  },
+  "deterministic": true,
+  "evaluation_timestamp": "2026-10-08T11:50:51Z"
+}

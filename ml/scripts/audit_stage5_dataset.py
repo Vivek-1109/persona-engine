@@ -48,20 +48,7 @@ def load_jsonl(path: Path) -> List[Dict[str, Any]]:
     return records
 
 
-def extract_emojis(text: str) -> List[str]:
-    emojis = []
-    for char in text:
-        cp = ord(char)
-        if (
-            unicodedata.category(char) in ("So", "Sk")
-            or 0x1F300 <= cp <= 0x1FAFF
-            or 0x2600 <= cp <= 0x27BF
-            or 0x1F600 <= cp <= 0x1F64F
-            or 0x1F680 <= cp <= 0x1F6FF
-            or 0x2B50 <= cp <= 0x2B55
-        ):
-            emojis.append(char)
-    return emojis
+from src.preprocessing.behavioral_features import extract_emojis
 
 
 def audit_stage5_dataset():

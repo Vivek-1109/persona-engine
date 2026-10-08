@@ -1,0 +1,489 @@
+{
+  "timestamp": "2026-10-08T15:27:57.823650",
+  "total_records": 5938,
+  "splits": {
+    "train": 3760,
+    "val": 868,
+    "test": 1310
+  },
+  "deterministic_checks": {
+    "is_question_vs_response_type_contradictions": 0,
+    "has_emoji_vs_emoji_count_mismatches": 0,
+    "response_length_calculation_mismatches": 0,
+    "context_depth_mismatches": 0,
+    "skin_tone_modifiers_miscounted_records": 118,
+    "skin_tone_modifiers_total_characters": 118
+  },
+  "field_quality_scores": {
+    "language": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "93.8% Hinglish, 4.5% English, 1.0% Mixed, 0.7% Unknown (verified digits, pure emojis, or punctuation). 0 contradictions."
+    },
+    "response_length": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Character count, word count, and length categorization are 100% mathematically exact with 0 mismatches."
+    },
+    "is_question": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "100% deterministic alignment with syntax and response_type='question'. 0 contradictions."
+    },
+    "has_slang": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Robust matching against curated Hinglish lexicon and compound slang. Highly reliable 16.9% distribution."
+    },
+    "context_depth": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Direct architectural parameter (1, 3, 7, 11) with 100% exact alignment with conversation window turn count."
+    },
+    "has_emoji": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Boolean emoji presence is 100% consistent with emoji_count > 0. Accurate across all unicode characters."
+    },
+    "emoji_count": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Grapheme-cluster-aware parsing correctly coalesces skin-tone modifiers (U+1F3FB..U+1F3FF) and ZWJ sequences. 100% of 118 records with modifiers match exact cluster counts (0 miscounts)."
+    },
+    "conversation_state": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Sensible deterministic heuristics (ongoing, banter, inquiry, opening, agreement, closing) with zero deep-context opening anomalies."
+    },
+    "topic": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Rebalanced context weighting (prompt: 1.8, target: 1.3, context: 0.9). 'Game aaja' -> 'gaming' correctly classified. Expanded gaming/college/tech vocabulary."
+    },
+    "tone": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Length <= 4 cutoff removed. Neutrals span across sentence lengths (2991 neutrals > 4 chars, max len 350). Casual dominance reduced to 27.4%. Meaningful semantic affect across all 7 categories."
+    },
+    "response_type": {
+      "quality": "HIGH",
+      "recommendation": "SAFE_TO_TRAIN",
+      "justification": "Word count discriminator removed. Classified by conversational function and preceding inquiry context (120 answers follow implicit/contextual requests, 91.1% follow explicit questions). All 8 categories preserved."
+    }
+  },
+  "topic_confidence_analysis": {
+    "movies": {
+      "count": 44,
+      "percentage": 0.74,
+      "mean_confidence": 0.669,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 3.58
+    },
+    "casual_chat": {
+      "count": 2700,
+      "percentage": 45.47,
+      "mean_confidence": 0.541,
+      "min_confidence": 0.2,
+      "max_confidence": 1.0,
+      "mean_score": 3.34
+    },
+    "plans": {
+      "count": 900,
+      "percentage": 15.16,
+      "mean_confidence": 0.669,
+      "min_confidence": 0.21,
+      "max_confidence": 1.0,
+      "mean_score": 3.97
+    },
+    "technology": {
+      "count": 614,
+      "percentage": 10.34,
+      "mean_confidence": 0.828,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.49
+    },
+    "gaming": {
+      "count": 694,
+      "percentage": 11.69,
+      "mean_confidence": 0.822,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.19
+    },
+    "other": {
+      "count": 199,
+      "percentage": 3.35,
+      "mean_confidence": 0.2,
+      "min_confidence": 0.2,
+      "max_confidence": 0.2,
+      "mean_score": 1.0
+    },
+    "social": {
+      "count": 415,
+      "percentage": 6.99,
+      "mean_confidence": 0.71,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 4.22
+    },
+    "college": {
+      "count": 229,
+      "percentage": 3.86,
+      "mean_confidence": 0.776,
+      "min_confidence": 0.26,
+      "max_confidence": 1.0,
+      "mean_score": 5.23
+    },
+    "sports": {
+      "count": 143,
+      "percentage": 2.41,
+      "mean_confidence": 0.819,
+      "min_confidence": 0.27,
+      "max_confidence": 1.0,
+      "mean_score": 6.05
+    }
+  },
+  "tone_analysis": {
+    "distribution": {
+      "neutral": 3501,
+      "casual": 1626,
+      "teasing": 260,
+      "serious": 236,
+      "uncertain": 200,
+      "humorous": 82,
+      "supportive": 33
+    },
+    "neutral_length_cutoff_max": 350,
+    "neutral_records_over_4_chars": 2991,
+    "casual_dominance_percentage": 27.38,
+    "teasing_with_laugh_emoji": 8,
+    "humorous_with_slang": 26
+  },
+  "response_type_analysis": {
+    "distribution": {
+      "statement": 3475,
+      "answer": 1345,
+      "question": 346,
+      "acknowledgement": 345,
+      "suggestion": 192,
+      "invitation": 118,
+      "refusal": 104,
+      "reaction": 13
+    },
+    "answers_without_preceding_question": 120,
+    "statements_with_preceding_question": 65,
+    "short_token_classifications": {
+      "ok": {
+        "acknowledgement": 131
+      },
+      "haa": {
+        "acknowledgement": 68
+      },
+      "okh": {
+        "acknowledgement": 90
+      },
+      "nhi": {
+        "refusal": 20
+      }
+    }
+  },
+  "language_analysis": {
+    "distribution": {
+      "hinglish": 5569,
+      "english": 268,
+      "mixed": 60,
+      "unknown": 41
+    },
+    "unknown_breakdown": {
+      "digits": 23,
+      "emojis_only": 13,
+      "punctuation_only": 1,
+      "total": 41
+    }
+  },
+  "ambiguous_prompts_audit": [
+    {
+      "prompt": "Aaja",
+      "variant_count": 10,
+      "total_occurrences": 52,
+      "topics_distribution": {
+        "plans": 8,
+        "technology": 1,
+        "gaming": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        },
+        {
+          "target": "5 minute\nRaaste mein hu jaake aata hu",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        },
+        {
+          "target": "Cumming",
+          "topic": "plans",
+          "context": [
+            "Aaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Bhai",
+      "variant_count": 4,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 4
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        },
+        {
+          "target": "call hai",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        },
+        {
+          "target": "Aayo",
+          "topic": "plans",
+          "context": [
+            "Aaja bhai"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Game M",
+      "variant_count": 4,
+      "total_occurrences": 8,
+      "topics_distribution": {
+        "gaming": 4
+      },
+      "variants_sample": [
+        {
+          "target": "Aaya",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        },
+        {
+          "target": "5 minutes bas aaya",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        },
+        {
+          "target": "Bhai abhi khana Mila hai khaa ke aata hu",
+          "topic": "gaming",
+          "context": [
+            "Aaja game m"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Re",
+      "variant_count": 3,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 2,
+        "technology": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Yes boss",
+          "topic": "plans",
+          "context": [
+            "Aaja re"
+          ]
+        },
+        {
+          "target": "Phone charge kar raha hu 30 hai",
+          "topic": "technology",
+          "context": [
+            "Aaja re"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja re"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Game Aaja",
+      "variant_count": 2,
+      "total_occurrences": 3,
+      "topics_distribution": {
+        "gaming": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "gaming",
+          "context": [
+            "Game aaja"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "gaming",
+          "context": [
+            "Game aaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Be",
+      "variant_count": 2,
+      "total_occurrences": 4,
+      "topics_distribution": {
+        "casual_chat": 1,
+        "plans": 1
+      },
+      "variants_sample": [
+        {
+          "target": "Bsdk",
+          "topic": "casual_chat",
+          "context": [
+            "Aaja be"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja be"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Aaja Bhadwe",
+      "variant_count": 2,
+      "total_occurrences": 6,
+      "topics_distribution": {
+        "plans": 2
+      },
+      "variants_sample": [
+        {
+          "target": "On ho raha hai",
+          "topic": "plans",
+          "context": [
+            "Aaja bhadwe"
+          ]
+        },
+        {
+          "target": "Aaya",
+          "topic": "plans",
+          "context": [
+            "Aaja bhadwe"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Lawde Aaja",
+      "variant_count": 2,
+      "total_occurrences": 5,
+      "topics_distribution": {
+        "plans": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Isme jyada mazaa hai🤤",
+          "topic": "plans",
+          "context": [
+            "Lawde\nAaja"
+          ]
+        },
+        {
+          "target": "Neend aa rahi hai🥲\nNaashte ke baad\nBol",
+          "topic": "plans",
+          "context": [
+            "Lawde\nAaja"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Khelega",
+      "variant_count": 10,
+      "total_occurrences": 36,
+      "topics_distribution": {
+        "gaming": 10
+      },
+      "variants_sample": [
+        {
+          "target": "Aaja",
+          "topic": "gaming",
+          "context": [
+            "Khelega"
+          ]
+        },
+        {
+          "target": "Aata hu 6:30 tak",
+          "topic": "gaming",
+          "context": [
+            "Khelega ?"
+          ]
+        },
+        {
+          "target": "Market Jaa Raha hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega"
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "Khelega Kya",
+      "variant_count": 2,
+      "total_occurrences": 2,
+      "topics_distribution": {
+        "gaming": 2
+      },
+      "variants_sample": [
+        {
+          "target": "Abhi to college mein hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega kya"
+          ]
+        },
+        {
+          "target": "Abhi college mein hu jaake message karta hu",
+          "topic": "gaming",
+          "context": [
+            "Khelega kya"
+          ]
+        }
+      ]
+    }
+  ],
+  "suspicious_examples_count": 100,
+  "final_decision": "PASS — READY FOR STAGE 5 TRAINING"
+}

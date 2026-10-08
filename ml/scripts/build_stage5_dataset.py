@@ -85,7 +85,11 @@ def annotate_record(
     behav_feat = behavioral_extractor.extract_features(target_response, preceding_user_text=last_user_text)
 
     # 2. Topic Classification
-    topic_feat = topic_classifier.classify(target_response, context_text=context_combined_text)
+    topic_feat = topic_classifier.classify(
+        target_response,
+        context_text=context_combined_text,
+        preceding_user_text=last_user_text,
+    )
 
     # 3. Context Features
     ctx_feat = context_extractor.extract_features(context_turns, target_response=target_response)

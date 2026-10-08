@@ -82,6 +82,32 @@ class TestDeterministicTopicClassifier(unittest.TestCase):
         self.assertIsInstance(d["confidence"], float)
         self.assertIsInstance(d["scores"], dict)
 
+    def test_context_weighting_game_aaja(self):
+        # Target has "Aaja" (movement/plans keyword), but preceding prompt has "Game aaja"
+        # Preceding context + topic evidence should overcome target "aaja"
+        result = self.classifier.classify(
+            text="Aaja",
+            context_text="user: Game aaja",
+            preceding_user_text="Game aaja"
+        )
+        self.assertEqual(result.primary_topic, "gaming")
+
+    def test_gaming_room_code_hex(self):
+        result = self.classifier.classify("Ruk dobara banata hu 2628a4")
+        self.assertEqual(result.primary_topic, "gaming")
+
+    def test_gaming_kills_and_bande_maare(self):
+        result = self.classifier.classify(
+            text="Pil bhi gya",
+            context_text="Kitne bande maare bhai",
+            preceding_user_text="Kitne bande maare bhai"
+        )
+        self.assertEqual(result.primary_topic, "gaming")
+
+    def test_college_physics_newton(self):
+        result = self.classifier.classify("Maa chudaye newton physics class test")
+        self.assertEqual(result.primary_topic, "college")
+
 
 if __name__ == "__main__":
     unittest.main()

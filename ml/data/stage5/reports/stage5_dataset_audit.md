@@ -1,6 +1,6 @@
 # Stage 5 — Dataset Audit & Integrity Report
 
-**Generated:** 2026-10-08 14:44:56  
+**Generated:** 2026-10-08 15:27:53  
 **Total Stage 5 Examples:** 5,938  
 **Split Counts:** Train: 3,760 | Val: 868 | Test: 1,310  
 **Unique Conversations:** Train: 354 | Val: 77 | Test: 77 (Total: 508)  
@@ -30,24 +30,24 @@
 ### Tone Distribution
 | Tone | Count | Percentage |
 |:---|:---:|:---:|
-| `casual` | 4,595 | 77.38% |
-| `neutral` | 601 | 10.12% |
-| `teasing` | 222 | 3.74% |
-| `serious` | 201 | 3.38% |
-| `uncertain` | 193 | 3.25% |
-| `humorous` | 116 | 1.95% |
-| `supportive` | 10 | 0.17% |
+| `neutral` | 3,501 | 58.96% |
+| `casual` | 1,626 | 27.38% |
+| `teasing` | 260 | 4.38% |
+| `serious` | 236 | 3.97% |
+| `uncertain` | 200 | 3.37% |
+| `humorous` | 82 | 1.38% |
+| `supportive` | 33 | 0.56% |
 
 ### Response Type Distribution
 | Response Type | Count | Percentage |
 |:---|:---:|:---:|
-| `statement` | 2,898 | 48.80% |
-| `answer` | 2,084 | 35.10% |
+| `statement` | 3,475 | 58.52% |
+| `answer` | 1,345 | 22.65% |
 | `question` | 346 | 5.83% |
-| `acknowledgement` | 321 | 5.41% |
-| `suggestion` | 104 | 1.75% |
-| `refusal` | 94 | 1.58% |
-| `invitation` | 78 | 1.31% |
+| `acknowledgement` | 345 | 5.81% |
+| `suggestion` | 192 | 3.23% |
+| `invitation` | 118 | 1.99% |
+| `refusal` | 104 | 1.75% |
 | `reaction` | 13 | 0.22% |
 
 ### Stylistic Markers
@@ -61,15 +61,15 @@
 
 | Topic Category | Count | Percentage |
 |:---|:---:|:---:|
-| `casual_chat` | 2,424 | 40.82% |
-| `plans` | 1,286 | 21.66% |
-| `technology` | 634 | 10.68% |
-| `gaming` | 521 | 8.77% |
-| `social` | 432 | 7.28% |
-| `college` | 221 | 3.72% |
-| `other` | 220 | 3.70% |
-| `sports` | 137 | 2.31% |
-| `movies` | 63 | 1.06% |
+| `casual_chat` | 2,700 | 45.47% |
+| `plans` | 900 | 15.16% |
+| `gaming` | 694 | 11.69% |
+| `technology` | 614 | 10.34% |
+| `social` | 415 | 6.99% |
+| `college` | 229 | 3.86% |
+| `other` | 199 | 3.35% |
+| `sports` | 143 | 2.41% |
+| `movies` | 44 | 0.74% |
 
 ## 4. Context & Structural Dynamics
 
@@ -93,9 +93,9 @@
 
 ## 5. Emoji & Length Statistics
 
-- **Total Emojis in Dataset:** 934
+- **Total Emojis in Dataset:** 816
 - **Emoji Occurrence Rate:** 12.90% of messages contain emojis
-- **Top Emojis:** 🏻 (118), 🙂 (110), 👾 (88), 👍 (71), 🙃 (54), 🗿 (50), 👽 (43), 🕺 (40), 😂 (37), 🥲 (34)
+- **Top Emojis:** 🙂 (110), 👾 (88), 👍🏻 (62), 🙃 (54), 🗿 (50), 👽 (43), 😂 (37), 🥲 (34), 🫂 (33), 💀 (31)
 
 ### Response Length Metrics
 - **Average Characters / Message:** 40.01 (Median: 28)
