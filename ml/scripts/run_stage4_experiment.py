@@ -455,6 +455,7 @@ def run_stage4_experiment():
     eff_batch = batch_size * accum_steps
     steps_per_epoch = len(train_ds) // eff_batch
     total_steps = steps_per_epoch * args.epochs
+    warmup_steps = int(round(total_steps * 0.05))  # 5% warmup (71 steps)
 
     print("\nSTEP & BATCH CALCULATIONS:")
     print("-" * 50)
@@ -465,6 +466,7 @@ def run_stage4_experiment():
     print(f"  Steps per Epoch       : {steps_per_epoch}")
     print(f"  Total Epochs          : {args.epochs}")
     print(f"  Total Optimizer Steps : {total_steps:,}")
+    print(f"  Warmup Steps          : {warmup_steps} (5%)")
     print(f"  Learning Rate         : {args.lr}")
     print("-" * 50)
 
@@ -529,7 +531,7 @@ def run_stage4_experiment():
         gradient_accumulation_steps=accum_steps,
         learning_rate=args.lr,
         lr_scheduler_type="cosine",
-        warmup_ratio=0.05,
+        warmup_steps=warmup_steps,
         weight_decay=0.01,
         max_grad_norm=1.0,
         logging_steps=20,
@@ -676,7 +678,7 @@ def run_stage4_experiment():
         f.write(f"- **Gradient Accumulation Steps:** {accum_steps}\\n")
         f.write(f"- **Effective Batch Size:** {eff_batch}\\n")
         f.write(f"- **Learning Rate:** {args.lr}\\n")
-        f.write(f"- **Warmup Ratio:** 0.05\\n")
+        f.write(f"- **Warmup Steps:** {warmup_steps} (5%)\\n")
         f.write(f"- **Weight Decay:** 0.01\\n")
         f.write(f"- **Max Grad Norm:** 1.0\\n")
         f.write(f"- **LoRA Config:** r=16, alpha=32, dropout=0.05, target_modules=[q_proj, k_proj, v_proj, o_proj]\\n\\n")
