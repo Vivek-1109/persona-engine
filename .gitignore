@@ -93,9 +93,12 @@ ml/models/checkpoints/*
 !ml/models/adapters/.gitkeep
 !ml/models/checkpoints/.gitkeep
 
-# Markdown documentation (keep only root README.md)
+# Markdown documentation (keep root and ml READMEs, and reports)
 *.md
 !/README.md
+!ml/README.md
+!ml/data/stage5/reports/*.md
+!ml/experiments/*/*.md
 
 # Obsidian Vault
 obsidian/
