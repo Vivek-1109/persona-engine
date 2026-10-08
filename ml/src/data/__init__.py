@@ -1,6 +1,7 @@
 """
 Persona Engine — Data Subpackage
-Handles dataset loading, validation, cleaning, and train/val/test splitting.
+Handles WhatsApp parsing, conversation segmentation, behavioral annotation,
+candidate extraction, quality filtering, and leakage-free dataset splitting.
 """
 
 from .cleaner import DataCleaner, clean_conversations
@@ -14,6 +15,11 @@ from .loader import (
 )
 from .splitter import DatasetSplitter, split_conversations
 from .validator import DatasetValidator, ValidationResult, validate_dataset_file
+from .whatsapp_parser import WhatsAppParser, ParsedMessage
+from .conversation_segmenter import ConversationSegmenter, ConversationSession, DialogueTurn
+from .behavioral_annotator import BehavioralAnnotator, BehavioralAnnotation
+from .candidate_extractor import CandidateExtractor
+from .conversation_splitter import ConversationSplitter, SplitStats
 
 __all__ = [
     "iter_jsonl",
@@ -29,4 +35,14 @@ __all__ = [
     "clean_conversations",
     "DatasetSplitter",
     "split_conversations",
+    "WhatsAppParser",
+    "ParsedMessage",
+    "ConversationSegmenter",
+    "ConversationSession",
+    "DialogueTurn",
+    "BehavioralAnnotator",
+    "BehavioralAnnotation",
+    "CandidateExtractor",
+    "ConversationSplitter",
+    "SplitStats",
 ]

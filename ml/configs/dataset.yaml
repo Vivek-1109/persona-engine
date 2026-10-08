@@ -1,0 +1,53 @@
+# =============================================================================
+# Persona Engine — Stage 3 Dataset Configuration
+# =============================================================================
+
+data:
+  raw_file_path: "ml/data/raw/WhatsApp Chat with Naata.txt"
+  processed_dir: "ml/data/processed"
+  annotated_dir: "ml/data/annotated"
+  training_dir: "ml/data/training"
+
+speaker:
+  # Target persona speaker display name detected in WhatsApp export
+  persona_speaker: "Vivek Jha😎"
+  # Interlocutor display names (non-persona speakers)
+  partner_speakers:
+    - "Naata"
+  # Standardized persona name for metadata
+  persona_name: "Vivek"
+
+reconstruction:
+  # Inactivity threshold in minutes to demarcate conversation boundaries
+  conversation_gap_minutes: 120
+  # Minimum messages in a conversation segment to be considered viable
+  min_messages_per_conversation: 2
+
+context:
+  # Context turn lengths to generate (number of preceding turns)
+  context_turn_sizes: [1, 2, 4, 6]
+  # System prompt for training examples
+  system_prompt: "You are reproducing the communication style of the persona."
+
+splitting:
+  # Conversation-level split ratios (MUST sum to 1.0)
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+
+filtering:
+  # Exclude media, deleted, empty messages
+  exclude_media: true
+  exclude_deleted: true
+  exclude_empty: true
+  # Review threshold for maximum response length
+  max_response_chars_for_review: 500
+  # Quality categories: KEEP, REVIEW, EXCLUDE
+  keep_short_responses: true
+
+privacy:
+  # Flag sensitive data (phone, email, credentials)
+  flag_sensitive_pii: true
+  # Redact sensitive values in public reports
+  redact_in_reports: true
