@@ -187,8 +187,8 @@ def main():
         "--variant",
         type=str,
         default="stage5_v1",
-        choices=["stage5_v1", "stage7a_qwen2.5_3b"],
-        help="Model variant to test (default: stage5_v1)",
+        choices=["stage5_v1", "stage7a_qwen2.5_3b", "base_qwen2.5_1.5b"],
+        help="Model variant to test (default: stage5_v1, or base_qwen2.5_1.5b for base model without adapter)",
     )
     parser.add_argument(
         "--pipeline",

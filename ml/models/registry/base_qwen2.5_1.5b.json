@@ -1,0 +1,9 @@
+{
+  "model_id": "base_qwen2.5_1.5b",
+  "status": "foundation_base_model",
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter_path": null,
+  "training_method": "none",
+  "quantization": "NF4 4-bit",
+  "description": "Unadapted Qwen2.5-1.5B-Instruct base model for zero-shot inference and full 4-layer cognitive testing without LoRA adapter."
+}
