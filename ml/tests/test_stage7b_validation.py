@@ -86,21 +86,37 @@ class TestStage7BValidation(unittest.TestCase):
         self.assertEqual(err_res["missing_adapter_path_test"]["status"], "PASS")
 
     def test_smoke_tests_execution(self):
-        """Verify 3 smoke tests run and produce non-empty responses."""
+        """Verify smoke tests fail when adapter is unconfirmed and pass when confirmed."""
         gen = PersonaGenerator(model_id="stage7a_qwen2.5_3b")
         gen.load_model(mock=True)
 
+        # 1. Unconfirmed adapter (mock mode) -> smoke tests must FAIL per Section 7B.2
         results = run_smoke_tests(gen)
         self.assertEqual(len(results), 3)
         for r in results:
+            self.assertEqual(r["status"], "FAIL")
+            self.assertIn("Adapter loading not confirmed", r["failure_reasons"][0])
+
+        # 2. Confirmed adapter -> smoke tests pass
+        ModelLoader._adapter_loaded = True
+        results_confirmed = run_smoke_tests(gen)
+        self.assertEqual(len(results_confirmed), 3)
+        for r in results_confirmed:
             self.assertEqual(r["status"], "PASS")
             self.assertGreater(len(r["response"]), 0)
 
     def test_four_layer_memory_pipeline_smoke_test(self):
-        """Confirm all 4 engine components (Context, Memory, Orchestrator, Generator) are exercised."""
+        """Confirm all 4 engine components are exercised and require confirmed adapter."""
         gen = PersonaGenerator(model_id="stage7a_qwen2.5_3b")
         gen.load_model(mock=True)
 
+        # Unconfirmed adapter -> fails Generator layer
+        res_fail = run_memory_conditioned_pipeline_smoke_test(gen)
+        self.assertEqual(res_fail["status"], "FAIL")
+        self.assertFalse(res_fail["layers_exercised"]["generator"])
+
+        # Confirmed adapter -> all layers pass
+        ModelLoader._adapter_loaded = True
         res = run_memory_conditioned_pipeline_smoke_test(gen)
         self.assertEqual(res["status"], "PASS")
         self.assertTrue(res["layers_exercised"]["context_engine"])
@@ -109,6 +125,7 @@ class TestStage7BValidation(unittest.TestCase):
         self.assertTrue(res["layers_exercised"]["generator"])
         self.assertIn("mem_laptop_nitro", res["retrieved_memory_ids"])
         self.assertEqual(res["strategy"], "answer")
+
 
     def test_latency_benchmarking(self):
         """Verify benchmark measurement returns latency percentiles."""
