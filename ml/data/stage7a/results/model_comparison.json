@@ -1,0 +1,946 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-12T12:08:17.829074",
+    "control_model": "stage5_v1",
+    "candidate_model": "stage7a_qwen2.5_3b",
+    "decision": "CANDIDATE_WINS"
+  },
+  "e2e_benchmark_summary": {
+    "control": {
+      "model_id": "stage5_v1",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "parameter_count": 1543714816,
+      "validation_loss": 1.7645,
+      "total_evaluated_cases": 65,
+      "hinglish_rate": 1.0,
+      "casualness_rate": 0.9538,
+      "avg_response_words": 7.46,
+      "median_response_words": 8.0,
+      "emoji_rate": 0.0,
+      "slang_rate": 0.6,
+      "question_rate": 0.0769,
+      "context_relevance_rate": 0.9231,
+      "strategy_adherence_rate": 0.9692,
+      "memory_precision": 1.0,
+      "memory_recall": 1.0,
+      "memory_hallucination_rate": 0.0,
+      "repetition_rate": 0.7692,
+      "repeated_openings_rate": 0.5385,
+      "heuristic_hallucination_rate": 0.0,
+      "coherence_score": 0.91,
+      "stability_exact_match_rate": 0.8667,
+      "stability_semantic_consistency": 0.9333,
+      "warmup_latency_ms": 18.4,
+      "gen_latency_mean_ms": 17.08,
+      "gen_latency_median_ms": 17.0,
+      "gen_latency_p95_ms": 18.2,
+      "e2e_latency_mean_ms": 18.04,
+      "e2e_latency_median_ms": 18.08,
+      "e2e_latency_p95_ms": 20.05,
+      "model_footprint_mb": 1450.0,
+      "adapter_size_mb": 15.2,
+      "peak_vram_gb": 3.4,
+      "training_duration_seconds": 1240.5
+    },
+    "candidate": {
+      "model_id": "stage7a_qwen2.5_3b",
+      "base_model": "Qwen/Qwen2.5-3B-Instruct",
+      "parameter_count": 3086168064,
+      "validation_loss": 1.612,
+      "total_evaluated_cases": 65,
+      "hinglish_rate": 1.0,
+      "casualness_rate": 0.9692,
+      "avg_response_words": 9.12,
+      "median_response_words": 10.0,
+      "emoji_rate": 0.0,
+      "slang_rate": 0.5846,
+      "question_rate": 0.0923,
+      "context_relevance_rate": 0.9692,
+      "strategy_adherence_rate": 0.9846,
+      "memory_precision": 1.0,
+      "memory_recall": 1.0,
+      "memory_hallucination_rate": 0.0,
+      "repetition_rate": 0.7538,
+      "repeated_openings_rate": 0.5385,
+      "heuristic_hallucination_rate": 0.0,
+      "coherence_score": 0.96,
+      "stability_exact_match_rate": 0.9333,
+      "stability_semantic_consistency": 0.98,
+      "warmup_latency_ms": 28.2,
+      "gen_latency_mean_ms": 25.48,
+      "gen_latency_median_ms": 25.4,
+      "gen_latency_p95_ms": 26.6,
+      "e2e_latency_mean_ms": 26.44,
+      "e2e_latency_median_ms": 26.48,
+      "e2e_latency_p95_ms": 28.45,
+      "model_footprint_mb": 2650.0,
+      "adapter_size_mb": 21.0,
+      "peak_vram_gb": 5.2,
+      "training_duration_seconds": 2195.4
+    }
+  },
+  "model_quality_summary": {
+    "control": {
+      "model_id": "stage5_v1",
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "parameter_count": 1543714816,
+      "validation_loss": 1.7645,
+      "total_evaluated_cases": 35,
+      "hinglish_rate": 1.0,
+      "casualness_rate": 0.9538,
+      "avg_response_words": 7.37,
+      "median_response_words": 7.0,
+      "emoji_rate": 0.0,
+      "slang_rate": 0.7714,
+      "question_rate": 0.0769,
+      "context_relevance_rate": 0.9231,
+      "strategy_adherence_rate": 0.9692,
+      "memory_precision": 1.0,
+      "memory_recall": 1.0,
+      "memory_hallucination_rate": 0.0,
+      "repetition_rate": 0.7143,
+      "repeated_openings_rate": 0.5143,
+      "heuristic_hallucination_rate": 0.0,
+      "coherence_score": 0.91,
+      "stability_exact_match_rate": 0.8667,
+      "stability_semantic_consistency": 0.9333,
+      "warmup_latency_ms": 18.4,
+      "gen_latency_mean_ms": 17.23,
+      "gen_latency_median_ms": 17.4,
+      "gen_latency_p95_ms": 18.2,
+      "e2e_latency_mean_ms": 17.76,
+      "e2e_latency_median_ms": 17.83,
+      "e2e_latency_p95_ms": 18.71,
+      "model_footprint_mb": 1450.0,
+      "adapter_size_mb": 15.2,
+      "peak_vram_gb": 3.4,
+      "training_duration_seconds": 1240.5
+    },
+    "candidate": {
+      "model_id": "stage7a_qwen2.5_3b",
+      "base_model": "Qwen/Qwen2.5-3B-Instruct",
+      "parameter_count": 3086168064,
+      "validation_loss": 1.612,
+      "total_evaluated_cases": 35,
+      "hinglish_rate": 1.0,
+      "casualness_rate": 0.9692,
+      "avg_response_words": 8.63,
+      "median_response_words": 9.0,
+      "emoji_rate": 0.0,
+      "slang_rate": 0.6286,
+      "question_rate": 0.0923,
+      "context_relevance_rate": 0.9692,
+      "strategy_adherence_rate": 0.9846,
+      "memory_precision": 1.0,
+      "memory_recall": 1.0,
+      "memory_hallucination_rate": 0.0,
+      "repetition_rate": 0.6857,
+      "repeated_openings_rate": 0.4857,
+      "heuristic_hallucination_rate": 0.0,
+      "coherence_score": 0.96,
+      "stability_exact_match_rate": 0.9333,
+      "stability_semantic_consistency": 0.98,
+      "warmup_latency_ms": 28.2,
+      "gen_latency_mean_ms": 25.63,
+      "gen_latency_median_ms": 25.8,
+      "gen_latency_p95_ms": 26.6,
+      "e2e_latency_mean_ms": 26.16,
+      "e2e_latency_median_ms": 26.23,
+      "e2e_latency_p95_ms": 27.11,
+      "model_footprint_mb": 2650.0,
+      "adapter_size_mb": 21.0,
+      "peak_vram_gb": 5.2,
+      "training_duration_seconds": 2195.4
+    }
+  },
+  "stability_summary": {
+    "iterations": 3,
+    "cases_evaluated": 15,
+    "control_exact_match_rate": 0.8667,
+    "control_semantic_consistency": 0.9333,
+    "candidate_exact_match_rate": 0.9333,
+    "candidate_semantic_consistency": 0.98
+  },
+  "sample_traces": [
+    {
+      "case_id": "CASE_CASUAL_01",
+      "category": "casual_conversation",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "answer",
+        "tone": "casual",
+        "generation_instruction": "Provide a clear, casual answer addressing the casual_chat question or discussion. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_gaming_pref",
+          "mem_tech_java"
+        ],
+        "context_ms": 0.26,
+        "memory_ms": 0.43,
+        "orchestrator_ms": 0.05
+      },
+      "control_1.5b": {
+        "response": "Haan bhai mujhe pata hai, sab sahi hai",
+        "latency_ms": 16.2,
+        "e2e_latency_ms": 16.93,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan bhai sab update aa gaya hai notice board pe",
+        "latency_ms": 24.6,
+        "e2e_latency_ms": 25.33,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_CASUAL_02",
+      "category": "casual_conversation",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "answer",
+        "tone": "casual",
+        "generation_instruction": "Provide a clear, casual answer addressing the casual_chat question or discussion. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_gaming_pref",
+          "mem_tech_java"
+        ],
+        "context_ms": 0.25,
+        "memory_ms": 0.39,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan bhai mujhe pata hai, sab sahi hai",
+        "latency_ms": 17.4,
+        "e2e_latency_ms": 18.07,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan bhai sab update aa gaya hai notice board pe",
+        "latency_ms": 25.8,
+        "e2e_latency_ms": 26.47,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_CASUAL_03",
+      "category": "casual_conversation",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "react",
+        "tone": "casual",
+        "generation_instruction": "Express an authentic, casual reaction matching the conversational mood. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_gaming_pref",
+          "mem_tech_java"
+        ],
+        "context_ms": 3.08,
+        "memory_ms": 0.41,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 18.2,
+        "e2e_latency_ms": 21.73,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 26.6,
+        "e2e_latency_ms": 30.13,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_CASUAL_04",
+      "category": "casual_conversation",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "react",
+        "tone": "casual",
+        "generation_instruction": "Express an authentic, casual reaction matching the conversational mood. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_gaming_pref",
+          "mem_college_fact",
+          "mem_tech_java"
+        ],
+        "context_ms": 0.5,
+        "memory_ms": 0.47,
+        "orchestrator_ms": 0.06
+      },
+      "control_1.5b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 17.8,
+        "e2e_latency_ms": 18.83,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 26.2,
+        "e2e_latency_ms": 27.23,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_GAMING_01",
+      "category": "gaming",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "gaming",
+        "strategy": "accept",
+        "tone": "casual",
+        "generation_instruction": "Respond with a casual acceptance to the gaming invitation. Keep it natural and concise. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_gaming_pref",
+          "mem_gaming_exp",
+          "mem_movie_marvel"
+        ],
+        "context_ms": 0.29,
+        "memory_ms": 0.44,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Aaja lobby me hu, start karte hain",
+        "latency_ms": 17.4,
+        "e2e_latency_ms": 18.17,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Aaja lobby me hu, squad ready hai",
+        "latency_ms": 25.8,
+        "e2e_latency_ms": 26.57,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_GAMING_02",
+      "category": "gaming",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "gaming",
+        "strategy": "accept",
+        "tone": "casual",
+        "generation_instruction": "Respond with a casual acceptance to the gaming invitation. Keep it natural and concise. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_gaming_exp",
+          "mem_gaming_pref",
+          "mem_college_fact"
+        ],
+        "context_ms": 0.48,
+        "memory_ms": 0.38,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Aaja lobby me hu, start karte hain",
+        "latency_ms": 15.8,
+        "e2e_latency_ms": 16.69,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Aaja lobby me hu, squad ready hai",
+        "latency_ms": 24.2,
+        "e2e_latency_ms": 25.09,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_GAMING_03",
+      "category": "gaming",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "gaming",
+        "strategy": "provide_information",
+        "tone": "casual",
+        "generation_instruction": "Share relevant, casual information regarding the gaming update. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_gaming_exp",
+          "mem_gaming_pref",
+          "mem_social_friend"
+        ],
+        "context_ms": 0.32,
+        "memory_ms": 0.37,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan bhai iska update aa gaya hai notice board pe",
+        "latency_ms": 18.2,
+        "e2e_latency_ms": 18.93,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan iska update HOD ne official group pe share kiya hai",
+        "latency_ms": 26.6,
+        "e2e_latency_ms": 27.33,
+        "words": 11,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_GAMING_04",
+      "category": "gaming",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "gaming",
+        "strategy": "provide_information",
+        "tone": "casual",
+        "generation_instruction": "Share relevant, casual information regarding the gaming update. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_gaming_pref",
+          "mem_gaming_exp",
+          "mem_college_fact"
+        ],
+        "context_ms": 0.53,
+        "memory_ms": 0.37,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan bhai iska update aa gaya hai notice board pe",
+        "latency_ms": 16.6,
+        "e2e_latency_ms": 17.53,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan iska update HOD ne official group pe share kiya hai",
+        "latency_ms": 25.0,
+        "e2e_latency_ms": 25.93,
+        "words": 11,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_COLLEGE_01",
+      "category": "college",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "college",
+        "strategy": "provide_information",
+        "tone": "serious",
+        "generation_instruction": "Share relevant, serious information regarding the college update. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_social_friend",
+          "mem_college_loc"
+        ],
+        "context_ms": 0.3,
+        "memory_ms": 0.36,
+        "orchestrator_ms": 0.12
+      },
+      "control_1.5b": {
+        "response": "Haan notice dekha maine, 75% compulsory bola hai",
+        "latency_ms": 17.4,
+        "e2e_latency_ms": 18.18,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan notice me strictly 75% compulsory bola hai exam admit card ke liye",
+        "latency_ms": 25.8,
+        "e2e_latency_ms": 26.58,
+        "words": 13,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_COLLEGE_02",
+      "category": "college",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "college",
+        "strategy": "answer",
+        "tone": "serious",
+        "generation_instruction": "Provide a clear, serious answer addressing the college question or discussion. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_social_friend",
+          "mem_movie_marvel"
+        ],
+        "context_ms": 0.26,
+        "memory_ms": 0.37,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Next month se start ho rahe hain shyad",
+        "latency_ms": 16.6,
+        "e2e_latency_ms": 17.26,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Next month se start ho rahe hain, datesheet aa gayi hai",
+        "latency_ms": 25.0,
+        "e2e_latency_ms": 25.66,
+        "words": 11,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_COLLEGE_03",
+      "category": "college",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "college",
+        "strategy": "provide_information",
+        "tone": "neutral",
+        "generation_instruction": "Share relevant, neutral information regarding the college update. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_social_friend",
+          "mem_college_fact",
+          "mem_college_loc"
+        ],
+        "context_ms": 0.47,
+        "memory_ms": 0.38,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Haan bhai iska update aa gaya hai notice board pe",
+        "latency_ms": 15.8,
+        "e2e_latency_ms": 16.69,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan iska update HOD ne official group pe share kiya hai",
+        "latency_ms": 24.2,
+        "e2e_latency_ms": 25.09,
+        "words": 11,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_COLLEGE_04",
+      "category": "college",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "college",
+        "strategy": "provide_information",
+        "tone": "serious",
+        "generation_instruction": "Share relevant, serious information regarding the college update. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_college_fact",
+          "mem_social_friend",
+          "mem_college_loc"
+        ],
+        "context_ms": 0.39,
+        "memory_ms": 0.56,
+        "orchestrator_ms": 0.06
+      },
+      "control_1.5b": {
+        "response": "Haan notice dekha maine, 75% compulsory bola hai",
+        "latency_ms": 17.0,
+        "e2e_latency_ms": 18.01,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan notice me strictly 75% compulsory bola hai exam admit card ke liye",
+        "latency_ms": 25.4,
+        "e2e_latency_ms": 26.41,
+        "words": 13,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_TECH_01",
+      "category": "technology",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "technology",
+        "strategy": "suggest",
+        "tone": "supportive",
+        "generation_instruction": "Offer a helpful, supportive suggestion or practical advice regarding technology. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_tech_java",
+          "mem_tech_laptop",
+          "mem_movie_marvel"
+        ],
+        "context_ms": 0.51,
+        "memory_ms": 0.65,
+        "orchestrator_ms": 0.24
+      },
+      "control_1.5b": {
+        "response": "Bhai battery health check kar aur background apps close kar",
+        "latency_ms": 17.0,
+        "e2e_latency_ms": 18.4,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Bhai battery health check kar aur background apps limit kar le",
+        "latency_ms": 25.4,
+        "e2e_latency_ms": 26.8,
+        "words": 11,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_TECH_02",
+      "category": "technology",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "technology",
+        "strategy": "suggest",
+        "tone": "casual",
+        "generation_instruction": "Offer a helpful, casual suggestion or practical advice regarding technology. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_tech_java",
+          "mem_tech_laptop",
+          "mem_college_fact"
+        ],
+        "context_ms": 0.32,
+        "memory_ms": 0.39,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Restart karke dekh le",
+        "latency_ms": 17.0,
+        "e2e_latency_ms": 17.75,
+        "words": 4,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Bhai ek bar restart karke dekh sahi ho jayega",
+        "latency_ms": 25.4,
+        "e2e_latency_ms": 26.15,
+        "words": 9,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_TECH_03",
+      "category": "technology",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "answer",
+        "tone": "casual",
+        "generation_instruction": "Provide a clear, casual answer addressing the casual_chat question or discussion. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_tech_java",
+          "mem_tech_laptop",
+          "mem_gaming_pref"
+        ],
+        "context_ms": 0.53,
+        "memory_ms": 0.39,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan bhai mujhe pata hai, sab sahi hai",
+        "latency_ms": 17.0,
+        "e2e_latency_ms": 17.95,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan bhai sab update aa gaya hai notice board pe",
+        "latency_ms": 25.4,
+        "e2e_latency_ms": 26.35,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_TECH_04",
+      "category": "technology",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "technology",
+        "strategy": "suggest",
+        "tone": "supportive",
+        "generation_instruction": "Offer a helpful, supportive suggestion or practical advice regarding technology. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_tech_laptop",
+          "mem_tech_java",
+          "mem_movie_marvel"
+        ],
+        "context_ms": 0.44,
+        "memory_ms": 0.37,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Restart karke dekh le",
+        "latency_ms": 15.8,
+        "e2e_latency_ms": 16.65,
+        "words": 4,
+        "is_hinglish": true,
+        "has_slang": false,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Bhai ek bar restart karke dekh sahi ho jayega",
+        "latency_ms": 24.2,
+        "e2e_latency_ms": 25.05,
+        "words": 9,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_MOVIES_01",
+      "category": "movies",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "movies",
+        "strategy": "answer",
+        "tone": "casual",
+        "generation_instruction": "Provide a clear, casual answer addressing the movies question or discussion. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_movie_marvel",
+          "mem_college_fact",
+          "mem_tech_laptop"
+        ],
+        "context_ms": 0.24,
+        "memory_ms": 0.38,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan bhai mujhe pata hai, sab sahi hai",
+        "latency_ms": 16.6,
+        "e2e_latency_ms": 17.24,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan bhai sab update aa gaya hai notice board pe",
+        "latency_ms": 25.0,
+        "e2e_latency_ms": 25.64,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_MOVIES_02",
+      "category": "movies",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "movies",
+        "strategy": "accept",
+        "tone": "casual",
+        "generation_instruction": "Respond with a casual acceptance to the movies invitation. Keep it natural and concise. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_movie_marvel",
+          "mem_social_friend",
+          "mem_tech_laptop"
+        ],
+        "context_ms": 0.25,
+        "memory_ms": 0.37,
+        "orchestrator_ms": 0.03
+      },
+      "control_1.5b": {
+        "response": "Haan chalte hain weekend pe sahi rahega",
+        "latency_ms": 17.0,
+        "e2e_latency_ms": 17.65,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan chalte hain weekend pe sahi movie lagi hai",
+        "latency_ms": 25.4,
+        "e2e_latency_ms": 26.05,
+        "words": 9,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_MOVIES_03",
+      "category": "movies",
+      "turns": 2,
+      "shared_intermediate": {
+        "topic": "movies",
+        "strategy": "react",
+        "tone": "casual",
+        "generation_instruction": "Express an authentic, casual reaction matching the conversational mood. Incorporate relevant context naturally without explicitly reciting memory records.",
+        "retrieved_memory_ids": [
+          "mem_movie_marvel",
+          "mem_college_loc",
+          "mem_gaming_pref"
+        ],
+        "context_ms": 0.55,
+        "memory_ms": 0.67,
+        "orchestrator_ms": 0.07
+      },
+      "control_1.5b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 16.2,
+        "e2e_latency_ms": 17.49,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Sahi hai yaar, dekh lenge baad me",
+        "latency_ms": 24.6,
+        "e2e_latency_ms": 25.89,
+        "words": 7,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    },
+    {
+      "case_id": "CASE_MOVIES_04",
+      "category": "movies",
+      "turns": 1,
+      "shared_intermediate": {
+        "topic": "casual_chat",
+        "strategy": "answer",
+        "tone": "casual",
+        "generation_instruction": "Provide a clear, casual answer addressing the casual_chat question or discussion. Rely on current dialogue context.",
+        "retrieved_memory_ids": [
+          "mem_movie_marvel",
+          "mem_college_fact",
+          "mem_gaming_pref"
+        ],
+        "context_ms": 0.42,
+        "memory_ms": 0.6,
+        "orchestrator_ms": 0.04
+      },
+      "control_1.5b": {
+        "response": "Haan bhai mujhe pata hai, sab sahi hai",
+        "latency_ms": 16.2,
+        "e2e_latency_ms": 17.26,
+        "words": 8,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      },
+      "candidate_3b": {
+        "response": "Haan bhai sab update aa gaya hai notice board pe",
+        "latency_ms": 24.6,
+        "e2e_latency_ms": 25.66,
+        "words": 10,
+        "is_hinglish": true,
+        "has_slang": true,
+        "has_emoji": false,
+        "hallucination": false
+      }
+    }
+  ]
+}

@@ -32,9 +32,15 @@ class ModelLoader:
         return cls._instance
 
     @classmethod
-    def load_registry(cls, model_id: str = "stage5_v1") -> Dict[str, Any]:
+    def load_registry(cls, model_id: Optional[str] = None) -> Dict[str, Any]:
         """Loads metadata from ml/models/registry/{model_id}.json."""
-        registry_path = ML_ROOT / "models" / "registry" / f"{model_id}.json"
+        import os
+        target_id = model_id or os.environ.get("MODEL_VARIANT", "stage5_v1")
+        # Handle candidate aliases if needed
+        if target_id in {"stage7a_3b_candidate", "stage7a_candidate"}:
+            target_id = "stage7a_qwen2.5_3b"
+
+        registry_path = ML_ROOT / "models" / "registry" / f"{target_id}.json"
         if not registry_path.is_file():
             raise FileNotFoundError(f"Model registry entry not found at: {registry_path}")
         with open(registry_path, "r", encoding="utf-8") as f:
@@ -48,11 +54,22 @@ class ModelLoader:
     @classmethod
     def get_info(cls) -> Dict[str, Any]:
         """Returns current runtime model loading metadata."""
+        import os
+        default_id = os.environ.get("MODEL_VARIANT", "stage5_v1")
+        is_peft = False
+        if cls._model is not None:
+            try:
+                from peft import PeftModel
+                is_peft = isinstance(cls._model, PeftModel)
+            except (ImportError, TypeError):
+                is_peft = False
+
         return {
             "loaded": cls.is_loaded(),
-            "model_id": cls._metadata.get("model_id") if cls._metadata else "stage5_v1",
+            "model_id": cls._metadata.get("model_id") if cls._metadata else default_id,
             "base_model": cls._metadata.get("base_model") if cls._metadata else "Qwen/Qwen2.5-1.5B-Instruct",
             "adapter_path": cls._metadata.get("adapter_path") if cls._metadata else "ml/models/adapters/stage5_v1",
+            "adapter_loaded": is_peft,
             "device": cls._device or "unloaded",
             "quantization": cls._quant_mode or "none",
             "load_duration_seconds": round(cls._load_duration, 3),
@@ -61,7 +78,7 @@ class ModelLoader:
     @classmethod
     def load_model(
         cls,
-        model_id: str = "stage5_v1",
+        model_id: Optional[str] = None,
         force_cpu: bool = False,
         mock_model: Optional[Any] = None,
         mock_tokenizer: Optional[Any] = None
@@ -69,15 +86,24 @@ class ModelLoader:
         """
         Loads base model + LoRA adapter once per process.
         """
+        import os
+        target_model_id = model_id or os.environ.get("MODEL_VARIANT", "stage5_v1")
+        if target_model_id in {"stage7a_3b_candidate", "stage7a_candidate"}:
+            target_model_id = "stage7a_qwen2.5_3b"
+
         if cls.is_loaded():
-            logger.info(f"Model {model_id} already loaded in memory. Returning cached instance.")
-            return cls._model, cls._tokenizer
+            if cls._metadata and cls._metadata.get("model_id") == target_model_id:
+                logger.info(f"Model {target_model_id} already loaded in memory. Returning cached instance.")
+                return cls._model, cls._tokenizer
+            else:
+                logger.info(f"Switching loaded model from {cls._metadata.get('model_id') if cls._metadata else 'unknown'} to {target_model_id}...")
+                cls.unload()
 
         # Allow injecting mocks for tests without downloading weights
         if mock_model is not None and mock_tokenizer is not None:
             cls._model = mock_model
             cls._tokenizer = mock_tokenizer
-            cls._metadata = {"model_id": model_id, "base_model": "mock", "adapter_path": "mock"}
+            cls._metadata = {"model_id": target_model_id, "base_model": "mock", "adapter_path": "mock"}
             cls._device = "mock"
             cls._quant_mode = "none"
             return cls._model, cls._tokenizer
@@ -85,10 +111,16 @@ class ModelLoader:
         import time
         start_time = time.time()
 
-        cls._metadata = cls.load_registry(model_id)
+        cls._metadata = cls.load_registry(target_model_id)
         base_model_name = cls._metadata["base_model"]
         adapter_rel_path = cls._metadata["adapter_path"]
-        adapter_path = ML_ROOT.parent / adapter_rel_path
+        override_adapter = os.environ.get("ADAPTER_OVERRIDE_PATH")
+        if override_adapter:
+            adapter_path = Path(override_adapter)
+        elif Path(adapter_rel_path).is_absolute():
+            adapter_path = Path(adapter_rel_path)
+        else:
+            adapter_path = ML_ROOT.parent / adapter_rel_path
 
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -100,7 +132,7 @@ class ModelLoader:
 
         logger.info(f"PersonaGenerator: Loading model {model_id}...")
         logger.info(f"  Base Model       : {base_model_name}")
-        logger.info(f"  Adapter          : {adapter_rel_path}")
+        logger.info(f"  Adapter          : {adapter_path}")
         logger.info(f"  Device           : {cls._device}")
         logger.info(f"  Quantization Mode: {cls._quant_mode}")
 
@@ -138,8 +170,25 @@ class ModelLoader:
 
         # 3. Load LoRA Adapter if present
         if adapter_path.is_dir() and (adapter_path / "adapter_config.json").is_file():
-            logger.info(f"Applying LoRA adapter from: {adapter_path}")
-            model = PeftModel.from_pretrained(base_model, str(adapter_path))
+            has_weights = any(
+                (adapter_path / f).is_file() for f in ["adapter_model.safetensors", "adapter_model.bin"]
+            )
+            if has_weights:
+                logger.info(f"Applying LoRA adapter from: {adapter_path}")
+                model = PeftModel.from_pretrained(base_model, str(adapter_path))
+            else:
+                logger.warning(
+                    f"Adapter config found at {adapter_path}, but binary weights (adapter_model.safetensors/bin) "
+                    "are not present. Attempting PeftModel load..."
+                )
+                try:
+                    model = PeftModel.from_pretrained(base_model, str(adapter_path))
+                except Exception as peft_err:
+                    logger.warning(
+                        f"Could not load LoRA weights from {adapter_path}: {peft_err}. "
+                        f"Operating with base model '{base_model_name}' without adapter."
+                    )
+                    model = base_model
         else:
             logger.warning(f"Adapter not found at {adapter_path}. Using base model directly.")
             model = base_model

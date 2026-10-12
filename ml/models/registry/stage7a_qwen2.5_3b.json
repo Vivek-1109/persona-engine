@@ -1,0 +1,88 @@
+{
+  "model_id": "stage7a_qwen2.5_3b",
+  "status": "experimental",
+  "base_model": "Qwen/Qwen2.5-3B-Instruct",
+  "base_model_revision": "main",
+  "adapter_path": "ml/models/adapters/stage7a_qwen2.5_3b",
+  "dataset_version": "stage5_v1",
+  "dataset_fingerprint": {
+    "stage5_train.jsonl": {
+      "examples": 3760,
+      "bytes": 8531797,
+      "sha256": "c0544767c704411c4dad9f5ae8b431ada5eea1e8f20d754370622d1f2ba77a32"
+    },
+    "stage5_val.jsonl": {
+      "examples": 868,
+      "bytes": 1930004,
+      "sha256": "9abb31bc589d9687c2b39d2339841def0ff2f387f8bbe02c3f7c957277287210"
+    },
+    "stage5_test.jsonl": {
+      "examples": 1310,
+      "bytes": 3045396,
+      "sha256": "090ef267ac469684741f4413b676150f0f2c362f238a9a476c625aa3c4a3b0b1"
+    }
+  },
+  "training_config": {
+    "method": "QLoRA",
+    "quantization": "NF4 4-bit",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "learning_rate": 0.0002,
+    "scheduler": "cosine",
+    "warmup_percent": 0.05,
+    "warmup_steps": 71,
+    "optimizer": "paged_adamw_8bit",
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "epochs": 3,
+    "per_device_batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "effective_batch_size": 8,
+    "max_sequence_length": 512,
+    "assistant_only_masking": true,
+    "system_prompt": "You are reproducing the communication style of the persona.",
+    "seed": 42
+  },
+  "seed": 42,
+  "best_epoch": 2,
+  "best_validation_loss": 1.6120,
+  "validation_loss": 1.6380,
+  "training_loss": 1.2740,
+  "training_duration_seconds": 2195.4,
+  "quantization": "4-bit NF4",
+  "lora_configuration": {
+    "r": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "tokenizer_chat_template": {
+    "template_type": "native_qwen_chatml",
+    "format": "<|im_start|>{role}\\n{content}<|im_end|>",
+    "special_tokens": {
+      "im_start": "<|im_start|>",
+      "im_end": "<|im_end|>"
+    }
+  },
+  "generation_configuration": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_new_tokens": 64,
+    "repetition_penalty": 1.05
+  },
+  "evaluation_version": "stage7a_v1",
+  "evaluation_status": "evaluated",
+  "timestamp": "2026-10-12T12:00:00+05:30"
+}

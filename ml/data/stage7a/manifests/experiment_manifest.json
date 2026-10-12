@@ -1,0 +1,67 @@
+{
+  "experiment_id": "stage7a_base_model_comparison",
+  "created_at": "2026-10-12T11:55:00+05:30",
+  "git_commit": "815e2d6",
+  "control": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "adapter": "ml/models/adapters/stage5_v1",
+    "dataset_fingerprint": {
+      "stage5_train.jsonl": "c0544767c704411c4dad9f5ae8b431ada5eea1e8f20d754370622d1f2ba77a32",
+      "stage5_val.jsonl": "9abb31bc589d9687c2b39d2339841def0ff2f387f8bbe02c3f7c957277287210",
+      "stage5_test.jsonl": "090ef267ac469684741f4413b676150f0f2c362f238a9a476c625aa3c4a3b0b1"
+    },
+    "evaluation_version": "stage6e_v1",
+    "status": "control_baseline"
+  },
+  "candidate": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "adapter": "ml/models/adapters/stage7a_qwen2.5_3b",
+    "dataset_fingerprint": {
+      "stage5_train.jsonl": "c0544767c704411c4dad9f5ae8b431ada5eea1e8f20d754370622d1f2ba77a32",
+      "stage5_val.jsonl": "9abb31bc589d9687c2b39d2339841def0ff2f387f8bbe02c3f7c957277287210",
+      "stage5_test.jsonl": "090ef267ac469684741f4413b676150f0f2c362f238a9a476c625aa3c4a3b0b1"
+    },
+    "training_configuration": {
+      "method": "QLoRA",
+      "quantization": "4-bit NF4",
+      "lora_r": 16,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "epochs": 3,
+      "batch_size": 2,
+      "gradient_accumulation_steps": 4,
+      "effective_batch_size": 8,
+      "learning_rate": 0.0002,
+      "lr_scheduler": "cosine",
+      "warmup_steps": 71,
+      "weight_decay": 0.01,
+      "max_grad_norm": 1.0,
+      "max_seq_length": 512,
+      "assistant_only_masking": true,
+      "system_prompt": "You are reproducing the communication style of the persona."
+    },
+    "status": "experimental"
+  },
+  "shared": {
+    "seed": 42,
+    "generation_config": {
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "max_new_tokens": 64,
+      "repetition_penalty": 1.05
+    },
+    "evaluation_benchmark": {
+      "stage6e_cases": 65,
+      "stage7a_quality_cases": 35
+    },
+    "context_version": "stage6f_v1",
+    "memory_version": "stage6c_v1",
+    "orchestrator_version": "stage6d_v1"
+  }
+}

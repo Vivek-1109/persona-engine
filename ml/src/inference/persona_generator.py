@@ -22,13 +22,17 @@ class PersonaGenerator:
 
     def __init__(
         self,
-        model_id: str = "stage5_v1",
+        model_id: Optional[str] = None,
         base_model_name_or_path: Optional[str] = None,
         adapter_path: Optional[Union[str, Any]] = None,
         device: Optional[str] = None,
     ):
-        self.model_id = model_id
-        self.base_model_name = base_model_name_or_path or "Qwen/Qwen2.5-1.5B-Instruct"
+        import os
+        self.model_id = model_id or os.environ.get("MODEL_VARIANT", "stage5_v1")
+        if self.model_id in {"stage7a_3b_candidate", "stage7a_candidate"}:
+            self.model_id = "stage7a_qwen2.5_3b"
+        default_base = "Qwen/Qwen2.5-3B-Instruct" if "3b" in self.model_id else "Qwen/Qwen2.5-1.5B-Instruct"
+        self.base_model_name = base_model_name_or_path or default_base
         self._mock_mode = False
 
     @property
@@ -49,10 +53,11 @@ class PersonaGenerator:
             mock_tokenizer.decode.return_value = "Persona Model Response Placeholder: kuch nahi bhai chill"
 
             self._mock_mode = True
-            ModelLoader.load_model(mock_model=mock_model, mock_tokenizer=mock_tokenizer)
+            ModelLoader.load_model(model_id=self.model_id, mock_model=mock_model, mock_tokenizer=mock_tokenizer)
         else:
             self._mock_mode = False
-            ModelLoader.load_model(model_id=self.model_id)
+            target_id = model_name or self.model_id
+            ModelLoader.load_model(model_id=target_id)
 
     def unload_model(self) -> None:
         """Unloads model from memory."""
